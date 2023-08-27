@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
 // Dummy API
 app.use('/', require('./dummy/mon_zakat'));
 
+// Admin API
+app.use('/', require('./routes/admin/mon_zakat'));
+app.use('/', require('./routes/admin/provinsi'));
+
 
 
 module.exports = app;

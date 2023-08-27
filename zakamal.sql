@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Agu 2023 pada 09.22
+-- Waktu pembuatan: 27 Agu 2023 pada 15.41
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.0.28
 
@@ -33,7 +33,8 @@ CREATE TABLE `monitoring_zakat` (
   `bulan` varchar(25) NOT NULL,
   `tahun` int(11) NOT NULL,
   `total_terkumpul` bigint(20) NOT NULL,
-  `total_pengeluaran` bigint(20) NOT NULL
+  `total_pengeluaran` bigint(20) NOT NULL,
+  `total_keseluruhan` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
