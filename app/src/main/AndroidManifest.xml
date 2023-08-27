@@ -11,16 +11,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zakamal"
         tools:targetApi="33">
-        <activity
-            android:name=".ui.Home.HomeActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".ui.Home.HomeActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".ui.Login.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".Provinsi.ProvinsiActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/Home">
+            android:exported="false" />
+        <activity
+            android:name=".authentication.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

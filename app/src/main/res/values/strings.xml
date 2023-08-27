@@ -6,4 +6,6 @@
     <string name="comunity_desc">Temukan inspirasi tentang zakat dan perkembangan zakat secara sosial bersama pengguna lain</string>
     <string name="card_community_desc">Merapihkan ruangan belajar anak yatim piatu</string>
     <string name="card_community_number">Rp.1.000.000</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
