@@ -4,9 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.zakamal.MainActivity
-import com.example.zakamal.R
 import com.example.zakamal.databinding.ActivityLoginBinding
-import com.example.zakamal.ui.Home.HomeActivity
 
 class LoginActivity : AppCompatActivity() {
 
