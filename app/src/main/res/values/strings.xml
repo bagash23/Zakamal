@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Zakamal</string>
+    <string name="Home">home\n</string>
+    <string name="lupa_kata_sandi">Lupa Kata Sandi?</string>
+    <string name="masuk">Masuk</string>
+    <string name="comunity_desc">Temukan inspirasi tentang zakat dan perkembangan zakat secara sosial bersama pengguna lain</string>
+    <string name="card_community_desc">Merapihkan ruangan belajar anak yatim piatu</string>
+    <string name="card_community_number">Rp.1.000.000</string>
 </resources>
