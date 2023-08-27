@@ -1,15 +1,27 @@
 package com.example.zakamal
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.zakamal.BottomNav.AkunFragment
 import com.example.zakamal.BottomNav.HomeFragment
 import com.example.zakamal.BottomNav.MonitoringFragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         val fragmentHome = HomeFragment()
         val fragmentMonitoring = MonitoringFragment()
         val fragmentAkun = AkunFragment()
+
+
 
         setFragment(fragmentHome)
 
@@ -54,6 +68,7 @@ class MainActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.txt_menu2).setTextColor(resources.getColor(R.color.txt_disable_tab));
             findViewById<TextView>(R.id.txt_menu3).setTextColor(resources.getColor(R.color.Primary_Blue_80));
         }
+
     }
 
 
@@ -69,4 +84,6 @@ class MainActivity : AppCompatActivity() {
     private fun changeImage(imageView: ImageView, int: Int) {
         imageView.setImageResource(int)
     }
+
+
 }
