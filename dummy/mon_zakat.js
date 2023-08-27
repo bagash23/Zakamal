@@ -7,8 +7,6 @@ const db = require('../config');
 router.get('/monitoring-zakat/:bulan', (req, res) => {
     const inputBulan = req.params.bulan.toLowerCase();
 
-    const connection = db;
-
     const bulanMap = {
         'jan': 'Januari',
         'feb': 'Februari',
@@ -26,25 +24,15 @@ router.get('/monitoring-zakat/:bulan', (req, res) => {
 
     const bulan = bulanMap[inputBulan] || inputBulan;
 
-    connection.connect(err => {
-        if (err) {
-            console.error('Error connecting to database:', err);
-            res.status(500).send('Terjadi kesalahan: ' + err.message);
+    const query = `SELECT mz.*, p.nama_provinsi FROM monitoring_zakat mz LEFT JOIN provinsi p ON mz.id_provinsi = p.id_provinsi WHERE mz.bulan LIKE ?`;
+
+    db.query(query, [`%${bulan}%`], (queryErr, rows) => {
+        if (queryErr) {
+            console.error('Error executing query:', queryErr);
+            res.status(500).send('Terjadi kesalahan: ' + queryErr.message);
             return;
         }
-
-        const query = `SELECT mz.*, p.nama_provinsi FROM monitoring_zakat mz LEFT JOIN provinsi p ON mz.id_provinsi = p.id_provinsi WHERE mz.bulan LIKE ?`;
-
-        connection.query(query, [`%${bulan}%`], (queryErr, rows) => {
-            connection.end();
-
-            if (queryErr) {
-                console.error('Error executing query:', queryErr);
-                res.status(500).send('Terjadi kesalahan: ' + queryErr.message);
-                return;
-            }
-            res.status(200).json(rows);
-        });
+        res.status(200).json(rows);
     });
 });
 
