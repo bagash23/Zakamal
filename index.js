@@ -19,6 +19,9 @@ app.use('/', require('./dummy/mon_zakat'));
 app.use('/', require('./routes/admin/mon_zakat'));
 app.use('/', require('./routes/admin/provinsi'));
 
+// User API
+app.use('/', require('./routes/pezakat/auth'));
+
 
 
 module.exports = app;
