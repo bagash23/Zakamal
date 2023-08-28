@@ -14,13 +14,16 @@ app.get('/', (req, res) => {
 
 // Dummy API
 app.use('/', require('./dummy/mon_zakat'));
+app.use('/', require('./dummy/pezakat'));
 
 // Admin API
 app.use('/', require('./routes/admin/mon_zakat'));
 app.use('/', require('./routes/admin/provinsi'));
+app.use('/', require('./routes/admin/pezakat'));
 
-// User API
-app.use('/', require('./routes/pezakat/auth'));
+// Pezakat API
+app.use('/', require('./routes/user/auth'));
+app.use('/', require('./routes/user/pezakat'));
 
 
 

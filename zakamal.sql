@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Agu 2023 pada 19.41
+-- Waktu pembuatan: 28 Agu 2023 pada 07.39
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.0.28
 
@@ -272,7 +272,8 @@ ALTER TABLE `monitoring_zakat`
 -- Ketidakleluasaan untuk tabel `pezakat`
 --
 ALTER TABLE `pezakat`
-  ADD CONSTRAINT `pezakat_ibfk_1` FOREIGN KEY (`id_provinsi`) REFERENCES `provinsi` (`id_provinsi`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pezakat_ibfk_1` FOREIGN KEY (`id_provinsi`) REFERENCES `provinsi` (`id_provinsi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pezakat_ibfk_2` FOREIGN KEY (`id_pezakat`) REFERENCES `user` (`id_pezakat`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `user`
