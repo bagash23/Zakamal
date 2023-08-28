@@ -1,4 +1,4 @@
-# Back-End Express API untuk ZakAmal
+# API Express Back-End untuk ZakAmal
 
 Repositori ini berisi API Express yang menyediakan berbagai endpoint untuk memfasilitasi pengambilan data pada Aplikasi ZakAmal.
 
@@ -14,9 +14,9 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 
 ## Endpoint
 
-### Dummy Data
+### Data Dummy
 
-#### Memasukkan Dummy Data Monitoring Zakat
+#### Memasukkan Data Dummy Monitoring Zakat
 - **URL:** `/dummy/zakat`
 - **Metode:** `POST`
 - **Respon:** Pesan sukses atau pesan error.
@@ -38,15 +38,49 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 
 ### Admin
 
-#### Menampilkan Data Zakat berdasarkan Provinsi
-- **URL:** `/admin/monitoring-zakat/provinsi/:nama_provinsi`
-- **Param Input:** `nama_provinsi`
+### Data Provinsi
+
+#### Mendapatkan Semua Data Provinsi
+- **URL:** `/admin/provinsi`
 - **Metode:** `GET`
 - **Respon:** Data zakat atau pesan error.
 
-#### Menampilkan Data Zakat berdasarkan Provinsi dan Tahun
+#### Mendapatkan Data Provinsi berdasarkan ID
+- **URL:** `/admin/provinsi/:id_provinsi`
+- **Param Path:** `id_provinsi`
+- **Metode:** `GET`
+- **Respon:** Data zakat atau pesan error.
+
+#### Menambahkan Data Zakat berdasarkan Provinsi
+- **URL:** `/admin/provinsi/add`
+- **Body Input:** `nama_provinsi`
+- **Metode:** `POST`
+- **Respon:** Data zakat atau pesan error.
+
+#### Mengubah Data Zakat berdasarkan Provinsi
+- **URL:** `/admin/provinsi/update/:id_provinsi`
+- **Param Path:** `id_provinsi`
+- **Body Input:** `nama_provinsi`
+- **Metode:** `PUT`
+- **Respon:** Data zakat atau pesan error.
+
+#### Menghapus Data Zakat berdasarkan Provinsi
+- **URL:** `/admin/provinsi/delete/:id_provinsi`
+- **Param Path:** `id_provinsi`
+- **Metode:** `DELETE`
+- **Respon:** Data zakat atau pesan error.
+
+#### Monitoring Data Zakat
+
+#### Mendapatkan Data Zakat berdasarkan Provinsi
+- **URL:** `/admin/monitoring-zakat/provinsi/:nama_provinsi`
+- **Param Path:** `nama_provinsi`
+- **Metode:** `GET`
+- **Respon:** Data zakat atau pesan error.
+
+#### Mendapatkan Data Zakat berdasarkan Provinsi dan Tahun
 - **URL:** `/admin/monitoring-zakat/provinsi/:nama_provinsi/tahun/:tahun`
-- **Param Input:** `nama_provinsi` dan `tahun`
+- **Param Path:** `nama_provinsi` dan `tahun`
 - **Metode:** `GET`
 - **Respon:** Data zakat atau pesan error.
 
@@ -56,16 +90,16 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **Metode:** `POST`
 - **Respon:** Pesan sukses atau pesan error.
 
-#### Mengubah Data Zakat berdasarkan Id Monitoring Zakat
+#### Mengubah Data Zakat berdasarkan ID Monitoring Zakat
 - **URL:** `/admin/monitoring-zakat/update/:id_mon_zakat`
-- **Param Input:** `id_mon_zakat`
+- **Param Path:** `id_mon_zakat`
 - **Body Input:** `id_provinsi, bulan, tahun, total_terkumpul, total_pengeluaran`
 - **Metode:** `PUT`
 - **Respon:** Pesan sukses atau pesan error.
 
-#### Menghapus Data Zakat berdasarkan Id Monitoring Zakat
+#### Menghapus Data Zakat berdasarkan ID Monitoring Zakat
 - **URL:** `/admin/monitoring-zakat/delete/:id_mon_zakat`
-- **Param Input:** `id_mon_zakat`
+- **Param Path:** `id_mon_zakat`
 - **Metode:** `DELETE`
 - **Respon:** Pesan sukses atau pesan error.
 
