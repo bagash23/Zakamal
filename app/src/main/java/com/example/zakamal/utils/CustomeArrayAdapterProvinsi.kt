@@ -18,7 +18,6 @@ class CustomeArrayAdapterProvinsi(
     ArrayAdapter<DummyProvinsi>(context, R.layout.rc_list_provinsi, dataSource){
 
     private val blueColor = ContextCompat.getColor(context, R.color.Primary_Blue_80)
-    private val whiteColor = ContextCompat.getColor(context, R.color.white)
     private val blackColor = ContextCompat.getColor(context, R.color.black)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

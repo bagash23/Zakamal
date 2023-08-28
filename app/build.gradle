@@ -62,5 +62,7 @@ dependencies {
     implementation 'com.diogobernardino:williamchart:3.10.1'
 //    bottom sheet
     implementation 'com.google.android.material:material:1.2.1'
+//    qrcode
+    implementation 'com.google.zxing:core:3.3.3';
 
 }

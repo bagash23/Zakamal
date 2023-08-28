@@ -3,6 +3,7 @@ package com.example.zakamal.BottomNav
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -65,11 +66,17 @@ class HomeFragment : Fragment() {
                 // Got last known location. In some rare situations, this can be null.
                 if (location != null) {
                     val geocoder = Geocoder(requireContext(), Locale.getDefault())
+                    val sharedPreferences = requireContext().getSharedPreferences("location", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
                     val addresses: List<Address> =
                         geocoder.getFromLocation(location.latitude, location.longitude, 1) as List<Address>
                     val cityName: String = addresses[0].locality
+                    val country: String = addresses[0].countryName
+                    println("data lokasi: ${addresses[0].countryCode}")
                     Toast.makeText(requireContext(), cityName, Toast.LENGTH_LONG).show()
-                    binding.tvLocation.text = cityName + ", Indonesia"
+                    editor.putString("location", cityName + ", "+ country)
+                    editor.apply()
+                    binding.tvLocation.text = cityName + ", " + country
                 }
             }
     }
