@@ -45,26 +45,26 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **Metode:** `GET`
 - **Respon:** Data zakat atau pesan error.
 
-#### Mendapatkan Data Provinsi berdasarkan ID
+#### Mendapatkan Data Provinsi berdasarkan ID Provinsi
 - **URL:** `/admin/provinsi/:id_provinsi`
 - **Param Path:** `id_provinsi`
 - **Metode:** `GET`
 - **Respon:** Data zakat atau pesan error.
 
-#### Menambahkan Data Zakat berdasarkan Provinsi
+#### Menambahkan Data Provinsi
 - **URL:** `/admin/provinsi/add`
 - **Body Input:** `nama_provinsi`
 - **Metode:** `POST`
 - **Respon:** Data zakat atau pesan error.
 
-#### Mengubah Data Zakat berdasarkan Provinsi
+#### Mengubah Data Provinsi berdasarkan ID Provinsi
 - **URL:** `/admin/provinsi/update/:id_provinsi`
 - **Param Path:** `id_provinsi`
 - **Body Input:** `nama_provinsi`
 - **Metode:** `PUT`
 - **Respon:** Data zakat atau pesan error.
 
-#### Menghapus Data Zakat berdasarkan Provinsi
+#### Menghapus Data Provinsi berdasarkan ID Provinsi
 - **URL:** `/admin/provinsi/delete/:id_provinsi`
 - **Param Path:** `id_provinsi`
 - **Metode:** `DELETE`
@@ -72,13 +72,13 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 
 #### Monitoring Data Zakat
 
-#### Mendapatkan Data Zakat berdasarkan Provinsi
+#### Mendapatkan Data Zakat berdasarkan Nama Provinsi
 - **URL:** `/admin/monitoring-zakat/provinsi/:nama_provinsi`
 - **Param Path:** `nama_provinsi`
 - **Metode:** `GET`
 - **Respon:** Data zakat atau pesan error.
 
-#### Mendapatkan Data Zakat berdasarkan Provinsi dan Tahun
+#### Mendapatkan Data Zakat berdasarkan Nama Provinsi dan Tahun
 - **URL:** `/admin/monitoring-zakat/provinsi/:nama_provinsi/tahun/:tahun`
 - **Param Path:** `nama_provinsi` dan `tahun`
 - **Metode:** `GET`
