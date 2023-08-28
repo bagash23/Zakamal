@@ -17,7 +17,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.zakamal.R
 import com.example.zakamal.databinding.FragmentHomeBinding
-import com.example.zakamal.databinding.FragmentMonitoringBinding
+
 import com.google.android.gms.location.FusedLocationProviderClient
 import java.util.Locale
 
@@ -34,7 +34,9 @@ private const val ARG_PARAM2 = "param2"
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? =null
+
     private val binding get() = _binding!!
+
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -44,8 +46,9 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+            _binding = FragmentHomeBinding.inflate(inflater, container, false)
+            val view = binding.root
+            return view
 
     }
 
