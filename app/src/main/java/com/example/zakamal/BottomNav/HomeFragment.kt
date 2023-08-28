@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -17,6 +18,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.zakamal.R
 import com.example.zakamal.databinding.FragmentHomeBinding
+import com.example.zakamal.ui.Community.CommunityAll.CommunityAllActivity
 
 import com.google.android.gms.location.FusedLocationProviderClient
 import java.util.Locale
@@ -45,10 +47,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-            _binding = FragmentHomeBinding.inflate(inflater, container, false)
-            val view = binding.root
-            return view
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
 
     }
 
@@ -59,6 +60,11 @@ class HomeFragment : Fragment() {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
         } else {
             getCurrentLocation()
+        }
+
+        binding.tvHomeSeeAll.setOnClickListener {
+            val intent = Intent(requireContext(), CommunityAllActivity::class.java)
+            startActivity(intent)
         }
     }
 

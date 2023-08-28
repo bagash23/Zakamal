@@ -35,14 +35,14 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/tv_item_community_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/card_community_desc"
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/tv_item_community_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

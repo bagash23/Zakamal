@@ -223,6 +223,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <LinearLayout
+        android:id="@+id/ll_community_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
