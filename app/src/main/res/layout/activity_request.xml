@@ -18,8 +18,9 @@
 
         <ImageView
             android:id="@+id/iv_back_community_all"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginVertical="10dp"
             android:paddingStart="10dp"
             android:paddingRight="10dp"
             app:srcCompat="@drawable/ic_back" />
@@ -29,9 +30,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/poppins_bold"
             android:gravity="center_vertical"
             android:paddingStart="10dp"
-            android:text="Pengajuan zakat" />
+            android:text="Pengajuan zakat"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -47,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginVertical="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -55,7 +59,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:text="Judul Permintaan" />
+                android:fontFamily="@font/poppins_regular"
+                android:text="Judul Permintaan"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextText"
@@ -63,16 +69,20 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
+                android:fontFamily="@font/poppins_regular"
                 android:inputType="text"
                 android:padding="10dp"
-                android:text="Renovasi Mesjid" />
+                android:text="Renovasi Mesjid"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:text="Alamat" />
+                android:fontFamily="@font/poppins_regular"
+                android:text="Alamat"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextText2"
@@ -82,7 +92,8 @@
                 android:ems="10"
                 android:inputType="text"
                 android:padding="10dp"
-                android:text="Jakarta Barat, Indonesia" />
+                android:text="Jakarta Barat, Indonesia"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -90,7 +101,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Jenis Zakat" />
+                android:text="Jenis Zakat"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextText3"
@@ -98,16 +110,20 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
+                android:fontFamily="@font/poppins_regular"
                 android:inputType="text"
                 android:padding="10dp"
-                android:text="Zakat Maal" />
+                android:text="Zakat Maal"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:text="Biaya" />
+                android:fontFamily="@font/poppins_regular"
+                android:text="Biaya"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextText4"
@@ -115,16 +131,20 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
+                android:fontFamily="@font/poppins_regular"
                 android:inputType="text"
                 android:padding="10dp"
-                android:text="IDR. 200.000.000" />
+                android:text="IDR. 200.000.000"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:text="Keterangan" />
+                android:fontFamily="@font/poppins_regular"
+                android:text="Keterangan"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/editTextText5"
@@ -132,14 +152,18 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
+                android:fontFamily="@font/poppins_regular"
                 android:inputType="text"
                 android:padding="10dp"
-                android:text="Bantu merapihkan ruangan belajar untuk anak yatim piatu karena kondisi sudah tidak kondusif" />
+                android:text="Bantu merapihkan ruangan belajar untuk anak yatim piatu karena kondisi sudah tidak kondusif"
+                android:textColor="@color/black" />
 
             <LinearLayout
+                android:id="@+id/ll_take_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/bg_dotted_border_green"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="20dp">
@@ -154,20 +178,32 @@
                     android:id="@+id/button2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Unggah" />
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/bg_button_green"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Unggah"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="Masukan File Pendukung" />
             </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_profile_active" />
 
             <Button
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/Primary_Blue_80"
+                android:layout_marginVertical="40dp"
+                android:background="@drawable/bg_button_green"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Terima"
                 android:textColor="@color/white" />

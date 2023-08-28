@@ -18,16 +18,16 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.zakamal.R
 import com.example.zakamal.databinding.FragmentHomeBinding
+import com.example.zakamal.databinding.FragmentHomeUserBinding
 import com.example.zakamal.ui.Community.CommunityAll.CommunityAllActivity
 import com.example.zakamal.ui.Community.CommunityComment.CommunityCommentActivity
+import com.example.zakamal.ui.Request.RequestActivity
 
 import com.google.android.gms.location.FusedLocationProviderClient
 import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -37,9 +37,12 @@ private const val ARG_PARAM2 = "param2"
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? =null
+    private var _bindingUser: FragmentHomeUserBinding? =null
 
     private val binding get() = _binding!!
+    private val bindingUser get() = _bindingUser!!
 
+    var isUser = true
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -48,10 +51,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
-
+        if (!isUser) {
+            _binding = FragmentHomeBinding.inflate(inflater, container, false)
+            return binding.root
+        } else {
+            _bindingUser = FragmentHomeUserBinding.inflate(inflater, container, false)
+            return bindingUser.root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,24 +67,51 @@ class HomeFragment : Fragment() {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
         } else {
             getCurrentLocation()
-        }
 
-        binding.tvHomeSeeAll.setOnClickListener {
-            val intent = Intent(requireContext(), CommunityAllActivity::class.java)
-            startActivity(intent)
         }
+        checkUser()
+    }
 
-        binding.llCommunityCard.setOnClickListener {
-            val intent = Intent(requireContext(), CommunityCommentActivity::class.java)
-            startActivity(intent)
+    private fun checkUser() {
+        if (isUser) {
+            bindingUser.tvHomeSeeAll.setOnClickListener {
+                val intent = Intent(requireContext(), CommunityAllActivity::class.java)
+                startActivity(intent)
+            }
+
+            bindingUser.llCommunityCard.setOnClickListener {
+                val intent = Intent(requireContext(), CommunityCommentActivity::class.java)
+                startActivity(intent)
+            }
+
+            bindingUser.llRequest.setOnClickListener {
+                val intent = Intent(requireContext(), RequestActivity::class.java)
+                startActivity(intent)
+            }
+
+        } else {
+            binding.tvHomeSeeAll.setOnClickListener {
+                val intent = Intent(requireContext(), CommunityAllActivity::class.java)
+                startActivity(intent)
+            }
+
+            binding.llCommunityCard.setOnClickListener {
+                val intent = Intent(requireContext(), CommunityCommentActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
+
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
+
+
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 // Got last known location. In some rare situations, this can be null.
+
+
                 if (location != null) {
                     val geocoder = Geocoder(requireContext(), Locale.getDefault())
                     val sharedPreferences = requireContext().getSharedPreferences("location", Context.MODE_PRIVATE)
@@ -91,7 +124,11 @@ class HomeFragment : Fragment() {
                     Toast.makeText(requireContext(), cityName, Toast.LENGTH_LONG).show()
                     editor.putString("location", cityName + ", "+ country)
                     editor.apply()
-                    binding.tvLocation.text = cityName + ", " + country
+                    if (!isUser) {
+                        binding.tvLocation.text = cityName + ", "+ country
+                    } else {
+                        bindingUser.tvLocation.text = cityName + ", "+ country
+                    }
                 }
             }
     }
