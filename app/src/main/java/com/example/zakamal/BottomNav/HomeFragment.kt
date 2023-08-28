@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import com.example.zakamal.R
 import com.example.zakamal.databinding.FragmentHomeBinding
 import com.example.zakamal.ui.Community.CommunityAll.CommunityAllActivity
+import com.example.zakamal.ui.Community.CommunityComment.CommunityCommentActivity
 
 import com.google.android.gms.location.FusedLocationProviderClient
 import java.util.Locale
@@ -64,6 +65,11 @@ class HomeFragment : Fragment() {
 
         binding.tvHomeSeeAll.setOnClickListener {
             val intent = Intent(requireContext(), CommunityAllActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.llCommunityCard.setOnClickListener {
+            val intent = Intent(requireContext(), CommunityCommentActivity::class.java)
             startActivity(intent)
         }
     }

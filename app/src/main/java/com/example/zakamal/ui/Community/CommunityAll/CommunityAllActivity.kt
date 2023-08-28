@@ -25,5 +25,9 @@ class CommunityAllActivity : AppCompatActivity() {
         binding.rvCommunityAll.adapter = communityAdapter
         binding.rvCommunityAll.layoutManager = LinearLayoutManager(this)
 
+        binding.ivBackCommunityAll.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 }

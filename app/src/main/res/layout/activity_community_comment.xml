@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/iv_back_comment"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
@@ -109,12 +109,14 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chat"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:itemCount="10"
-        tools:listitem="@layout/item_chat_other"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_chat_other" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
