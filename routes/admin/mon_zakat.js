@@ -16,7 +16,9 @@ router.get('/admin/monitoring-zakat/provinsi/:nama_provinsi', (req, res) => {
     db.query(query, [`%${inputProvinsi}%`], (queryErr, rows) => {
         if (queryErr) {
             console.error('Error executing query:', queryErr);
-            res.status(500).send('Terjadi kesalahan: ' + queryErr.message);
+            res.status(500).json({
+                message: 'Terjadi kesalahan: ' + queryErr.message
+            });
             return;
         }
         res.status(200).json(rows);
@@ -37,7 +39,9 @@ router.get('/admin/monitoring-zakat/provinsi/:nama_provinsi/tahun/:tahun', (req,
     db.query(query, [`%${inputProvinsi}%`, inputTahun], (queryErr, rows) => {
         if (queryErr) {
             console.error('Error executing query:', queryErr);
-            res.status(500).send('Terjadi kesalahan: ' + queryErr.message);
+            res.status(500).json({
+                message: 'Terjadi kesalahan: ' + queryErr.message
+            });
             return;
         }
         res.status(200).json(rows);
@@ -48,21 +52,55 @@ router.get('/admin/monitoring-zakat/provinsi/:nama_provinsi/tahun/:tahun', (req,
 router.post('/admin/monitoring-zakat/add', (req, res) => {
     const { id_provinsi, bulan, tahun, total_terkumpul, total_pengeluaran } = req.body;
 
-    const total_keseluruhan = total_terkumpul - total_pengeluaran;
+    if (!id_provinsi || !bulan || !tahun || !total_terkumpul || !total_pengeluaran) {
+        res.status(400).json({
+            message: 'Semua bagian harus diisi'
+        });
+        return;
+    }
 
     const connection = db;
 
-    const query = `INSERT INTO monitoring_zakat (id_provinsi, bulan, tahun, total_terkumpul, total_pengeluaran, total_keseluruhan) VALUES (?, ?, ?, ?, ?, ?)`;
+    const checkQuery = `SELECT COUNT(*) as count FROM monitoring_zakat WHERE id_provinsi = ? AND bulan = ? AND tahun = ?`;
 
-    connection.query(query, [id_provinsi, bulan, tahun, total_terkumpul, total_pengeluaran, total_keseluruhan], (queryErr, result) => {
-        if (queryErr) {
-            console.error('Error executing query:', queryErr);
-            res.status(500).send('Terjadi kesalahan: ' + queryErr.message);
+    connection.query(checkQuery, [id_provinsi, bulan, tahun], (checkErr, checkResult) => {
+        if (checkErr) {
+            console.error('Error executing check query:', checkErr);
+            res.status(500).json({
+                message: 'Terjadi kesalahan: ' + checkErr.message,
+            });
             return;
         }
 
-        res.status(201).json({
-            message: 'Berhasil menambahkan data zakat',
+        const existingCount = checkResult[0].count;
+
+        if (existingCount > 0) {
+            res.status(400).json({
+                message: `Data untuk bulan ${bulan} tahun ${tahun} dan provinsi tersebut sudah ada`
+            });
+            return;
+        }
+
+        if (total_terkumpul <= total_pengeluaran) {
+            total_pengeluaran = total_terkumpul - 100000;
+        }
+
+        const total_keseluruhan = total_terkumpul - total_pengeluaran;
+
+        const insertQuery = `INSERT INTO monitoring_zakat (id_provinsi, bulan, tahun, total_terkumpul, total_pengeluaran, total_keseluruhan) VALUES (?, ?, ?, ?, ?, ?)`;
+
+        connection.query(insertQuery, [id_provinsi, bulan, tahun, total_terkumpul, total_pengeluaran, total_keseluruhan], (queryErr, result) => {
+            if (queryErr) {
+                console.error('Error executing insert query:', queryErr);
+                res.status(500).json({
+                    message: 'Terjadi kesalahan: ' + queryErr.message,
+                });
+                return;
+            }
+            const insertId = result;
+            res.status(201).json({
+                message: `Berhasil menambahkan data zakat dengan id ${insertId}`,
+            });
         });
     });
 });
@@ -81,31 +119,14 @@ router.put('/admin/monitoring-zakat/update/:id_mon_zakat', (req, res) => {
     connection.query(query, [id_provinsi, bulan, tahun, total_terkumpul, total_pengeluaran, total_keseluruhan, id_mon_zakat], (queryErr, result) => {
         if (queryErr) {
             console.error('Error executing query:', queryErr);
-            res.status(500).send('Terjadi kesalahan: ' + queryErr.message);
+            res.status(500).json({
+                message: 'Terjadi kesalahan: ' + queryErr.message
+            });
             return;
         }
 
         res.status(200).json({
             message: `Berhasil mengubah data zakat pada id ${id_mon_zakat}`
-        });
-    });
-});
-
-// Delete all data zakat
-router.delete('/admin/monitoring-zakat/delete', (req, res) => {
-    const connection = db;
-
-    const query = `DELETE FROM monitoring_zakat`;
-
-    connection.query(query, (queryErr, result) => {
-        if (queryErr) {
-            console.error('Error executing query:', queryErr);
-            res.status(500).send('Terjadi kesalahan: ' + queryErr.message);
-            return;
-        }
-
-        res.status(200).json({
-            message: 'Berhasil menghapus semua data zakat'
         });
     });
 });
@@ -121,10 +142,11 @@ router.delete('/admin/monitoring-zakat/delete/:id_mon_zakat', (req, res) => {
     connection.query(query, [id_mon_zakat], (queryErr, result) => {
         if (queryErr) {
             console.error('Error executing query:', queryErr);
-            res.status(500).send('Terjadi kesalahan: ' + queryErr.message);
+            res.status(500).json({
+                message: 'Terjadi kesalahan: ' + queryErr.message
+            });
             return;
         }
-
         res.status(200).json({
             message: `Berhasil menghapus data zakat pada id ${id_mon_zakat}`
         });

@@ -26,8 +26,13 @@ router.post('/dummy/zakat', (req, res) => {
             continue;
         }
 
-        const terkumpul = Math.floor(Math.random() * 5000) + 5000000;
-        const pengeluaran = Math.floor(Math.random() * 1000) + 1000000;
+        const terkumpul = Math.floor(Math.random() * 4500000) + 5000000;
+        const pengeluaran = Math.floor(Math.random() * 900000) + 1000000;
+
+        if (terkumpul <= pengeluaran) {
+            pengeluaran = terkumpul - 100000;
+        }
+
         const total_keseluruhan = terkumpul - pengeluaran;
 
         insertValues.push(`(${idProvinsi}, '${bulan}', '${tahun}', ${terkumpul}, ${pengeluaran}, ${total_keseluruhan})`);
@@ -41,12 +46,35 @@ router.post('/dummy/zakat', (req, res) => {
     connection.query(query, (err, results) => {
         if (err) {
             console.error(err);
-            res.status(500).json('Terjadi kesalahan: ' + err.message);
-        } else {
-            const totalDataInserted = insertValues.length;
-            const successMessage = {message: `Berhasil memasukkan ${totalDataInserted} data.`};
-            res.status(200).json(successMessage);
+            res.status(500).json({
+                message: 'Terjadi kesalahan: ' + err.message
+            });
         }
+        const totalDataInserted = insertValues.length;
+        res.status(200).json({
+            message: `Berhasil memasukkan ${totalDataInserted} data monitoring zakat`
+        });
+    });
+});
+
+// Delete all data zakat
+router.delete('/dummy/zakat', (req, res) => {
+    const connection = db;
+
+    const query = `DELETE FROM monitoring_zakat`;
+
+    connection.query(query, (err, result) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            res.status(500).json({
+                message: 'Terjadi kesalahan: ' + err.message
+            });
+            return;
+        }
+        const totalDataDeleted = result.affectedRows;
+        res.status(200).json({
+            message: `Berhasil menghapus ${totalDataDeleted} data monitoring zakat`
+        });
     });
 });
 
