@@ -125,6 +125,11 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **Metode:** `GET`
 - **Respon:** Pesan sukses atau pesan error.
 
+#### Mendapatkan Data Post Feed berdasarkan Semua Status
+- **URL:** `/user/post_feed/status/all`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
 #### Mendapatkan Data Post Feed berdasarkan Status Pending
 - **URL:** `/user/post_feed/status/1`
 - **Metode:** `GET`

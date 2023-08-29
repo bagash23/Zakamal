@@ -25,6 +25,28 @@ router.get('/admin/post_feed', (req, res) => {
     });
 });
 
+// Get post_feed by all status
+router.get('/admin/post_feed/status/all', (req, res) => {
+    const getPostFeedQuery = `
+        SELECT post_feed.id_post_feed, post_feed.id_user, post_feed.id_provinsi, post_feed.nama, post_feed.judul_post, post_feed.biaya, post_feed.alamat, post_feed.keterangan, post_feed.status, post_feed.tanggal_post, user.nama_lengkap, provinsi.nama_provinsi, role.nama_role
+        FROM post_feed
+        INNER JOIN user ON post_feed.id_user = user.id_user
+        INNER JOIN provinsi ON post_feed.id_provinsi = provinsi.id_provinsi
+        INNER JOIN role ON user.id_role = role.id_role
+        ORDER BY post_feed.tanggal_post DESC
+    `;
+    db.query(getPostFeedQuery, (getPostFeedError, postFeedRows) => {
+        if (getPostFeedError) {
+            console.error(getPostFeedError);
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil post_feed'
+            });
+        }
+
+        res.status(200).json(postFeedRows);
+    });
+});
+
 // Get post_feed by status is 1
 router.get('/admin/post_feed/status/1', (req, res) => {
     const getPostFeedQuery = `
