@@ -7,6 +7,7 @@ import com.example.zakamal.model.monitoring.ProvinsiResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface Monitoring {
@@ -40,5 +41,12 @@ interface Monitoring {
     fun getKomentarByID(
     @Path("id_post_feed") idPostFeed: Int,
     ) : Call<List<KomentarResponse>>
+
+//    add komentar
+    @POST("v1/user/{id_user}/{id_post_feed}/komentar/add")
+    fun addKomentar(
+        @Path("id_user") idUser: Int,
+        @Path("id_post_feed") idPostFeed: Int
+    )
 
 }
