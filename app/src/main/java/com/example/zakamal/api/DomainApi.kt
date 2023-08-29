@@ -1,6 +1,9 @@
 package com.example.zakamal.api
 
+
+import com.example.zakamal.api.login.Login
 import com.example.zakamal.api.monitoring.Monitoring
+import com.example.zakamal.api.register.Register
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -13,4 +16,6 @@ object DomainApi {
         .build()
 
     val monitoringService: Monitoring = retrofit.create(Monitoring::class.java)
+    val registerService: Register = retrofit.create(Register::class.java)
+    val loginService: Login = retrofit.create(Login::class.java)
 }
