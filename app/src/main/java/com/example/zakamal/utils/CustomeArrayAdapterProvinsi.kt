@@ -10,12 +10,13 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.zakamal.R
 import com.example.zakamal.dummy.DummyProvinsi
+import com.example.zakamal.model.monitoring.ProvinsiResponse
 
 class CustomeArrayAdapterProvinsi(
     context: Context,
-    private val dataSource: List<DummyProvinsi>,
+    private val dataSource: List<ProvinsiResponse>,
     private val selectedProvinsiName: String?) :
-    ArrayAdapter<DummyProvinsi>(context, R.layout.rc_list_provinsi, dataSource){
+    ArrayAdapter<ProvinsiResponse>(context, R.layout.rc_list_provinsi, dataSource){
 
     private val blueColor = ContextCompat.getColor(context, R.color.Primary_Blue_80)
     private val blackColor = ContextCompat.getColor(context, R.color.black)
@@ -27,12 +28,12 @@ class CustomeArrayAdapterProvinsi(
         val textView: TextView = view.findViewById(R.id.txt_list_provinsi)
         val provinsi = getItem(position)
 
-        textView.text = provinsi?.name
+        textView.text = provinsi?.nama_provinsi
 
         // Reset warna untuk semua item
         textView.setTextColor(blackColor)
 
-        if (provinsi?.name == selectedProvinsiName) {
+        if (provinsi?.nama_provinsi == selectedProvinsiName) {
             textView.setTextColor(blueColor)
         }
 
