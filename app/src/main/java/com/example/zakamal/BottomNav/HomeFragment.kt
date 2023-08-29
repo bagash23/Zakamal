@@ -78,10 +78,8 @@ class HomeFragment : Fragment() {
 
         }
 
-        val listViewKomunitas: ListView = view.findViewById(R.id.komunitasHome)
-
         checkUser()
-        getKomunitasAll(listViewKomunitas)
+
     }
 
     private fun getKomunitasAll(listView: ListView) {
@@ -113,21 +111,24 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
 
-            bindingUser.llCommunityCard.setOnClickListener {
-                val intent = Intent(requireContext(), CommunityCommentActivity::class.java)
-                startActivity(intent)
-            }
 
             bindingUser.llRequest.setOnClickListener {
                 val intent = Intent(requireContext(), RequestActivity::class.java)
                 startActivity(intent)
             }
 
+            val listView = bindingUser.komunitasHome
+            getKomunitasAll(listView)
+
+
         } else {
             binding.tvHomeSeeAll.setOnClickListener {
                 val intent = Intent(requireContext(), CommunityAllActivity::class.java)
                 startActivity(intent)
             }
+
+            val listView = binding.komunitasHome
+            getKomunitasAll(listView)
 
 //            binding.llCommunityCard.setOnClickListener {
 //                val intent = Intent(requireContext(), CommunityCommentActivity::class.java)
