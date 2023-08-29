@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object DomainApi {
 
-    private const val BASE_URL = "https://f2bd-180-252-119-212.ngrok-free.app/"
+    private const val BASE_URL = "https://5771-125-160-225-142.ngrok-free.app/"
     val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

@@ -14,6 +14,8 @@
     <color name="Primary_Red">#FF0000</color>
     <color name="Primary_Orange">#FF5C00</color>
     <color name="txt_disable_tab">#929393</color>
+
+    <color name="Light_Green">#A5FF4B</color>
     
     <array name="bar_chart_colors">
         <item>#005331</item>
