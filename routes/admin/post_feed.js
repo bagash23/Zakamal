@@ -43,7 +43,12 @@ router.get('/admin/post_feed/status/all', (req, res) => {
             });
         }
 
-        res.status(200).json(postFeedRows);
+        const totalData = postFeedRows.length;
+
+        res.status(200).json({
+            totalData: totalData,
+            data: postFeedRows
+        });
     });
 });
 
@@ -66,7 +71,12 @@ router.get('/admin/post_feed/status/1', (req, res) => {
             });
         }
 
-        res.status(200).json(postFeedRows);
+        const totalData = postFeedRows.length;
+
+        res.status(200).json({
+            totalData: totalData,
+            data: postFeedRows
+        });
     });
 });
 
@@ -89,7 +99,12 @@ router.get('/admin/post_feed/status/2', (req, res) => {
             });
         }
 
-        res.status(200).json(postFeedRows);
+        const totalData = postFeedRows.length;
+
+        res.status(200).json({
+            totalData: totalData,
+            data: postFeedRows
+        });
     });
 });
 
@@ -112,7 +127,12 @@ router.get('/admin/post_feed/status/3', (req, res) => {
             });
         }
 
-        res.status(200).json(postFeedRows);
+        const totalData = postFeedRows.length;
+
+        res.status(200).json({
+            totalData: totalData,
+            data: postFeedRows
+        });
     });
 });
 
