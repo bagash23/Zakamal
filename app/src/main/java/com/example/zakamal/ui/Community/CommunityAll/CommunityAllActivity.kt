@@ -2,10 +2,18 @@ package com.example.zakamal.ui.Community.CommunityAll
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ListView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zakamal.R
+import com.example.zakamal.api.DomainApi
 import com.example.zakamal.databinding.ActivityCommunityAllBinding
 import com.example.zakamal.model.CommunityItem
+import com.example.zakamal.model.monitoring.AllProvinsiData
+import com.example.zakamal.utils.AllKomunitasAdapter
+import com.example.zakamal.utils.KomunitasHomeAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CommunityAllActivity : AppCompatActivity() {
     lateinit var binding: ActivityCommunityAllBinding
@@ -15,15 +23,27 @@ class CommunityAllActivity : AppCompatActivity() {
         binding = ActivityCommunityAllBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val itemList = listOf<CommunityItem>(
-            CommunityItem("Community 1", "Community 1 Description", "1"),
-            CommunityItem("Community 2", "Community 2 Description", "2"),
-            CommunityItem("Community 3", "Community 3 Description", "3"),
-        )
+        val listItem = findViewById<ListView>(R.id.komunitasHome)
+        val apiServices = DomainApi.monitoringService
+        val getAllKomunitas: Call<List<AllProvinsiData>> = apiServices.getAllPosttFeed()
 
-        communityAdapter = CommunityAdapter(itemList)
-        binding.rvCommunityAll.adapter = communityAdapter
-        binding.rvCommunityAll.layoutManager = LinearLayoutManager(this)
+        getAllKomunitas.enqueue(object : Callback<List<AllProvinsiData>> {
+            override fun onResponse(
+                call: Call<List<AllProvinsiData>>,
+                response: Response<List<AllProvinsiData>>
+            ) {
+                if (response.isSuccessful) {
+                    val komunitasAll = response.body()
+                    listItem.adapter = AllKomunitasAdapter(this@CommunityAllActivity, komunitasAll!!)
+                }
+            }
+
+            override fun onFailure(call: Call<List<AllProvinsiData>>, t: Throwable) {
+                println("Error ${t.message}")
+            }
+
+        })
+
 
         binding.ivBackCommunityAll.setOnClickListener {
             onBackPressed()

@@ -37,52 +37,128 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout8"
-        android:layout_width="0dp"
+        android:id="@+id/lr_card"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/Primary_Blue_80"
         android:orientation="vertical"
-        android:padding="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/shape_card"
+        tools:ignore="MissingConstraints"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_card"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            tools:ignore="MissingConstraints">
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/image_border_white"
-                android:padding="3dp"
-                app:srcCompat="@drawable/sekolah" />
+                android:id="@+id/poster_provinsi"
+                android:layout_width="120dp"
+                android:layout_height="130dp"
+                android:background="@drawable/shape_rounded_image"
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="15dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="match_parent"
+                    android:id="@+id/txt_status"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/card_community_desc"
-                    android:textColor="@color/white" />
+                    android:layout_marginStart="20dp"
+                    android:text="Status"
+                    android:textColor="@color/Light_Green"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/poster_provinsi" />
 
                 <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="match_parent"
+                    android:id="@+id/txt_judul"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/card_community_number"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Title Data"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    app:layout_constraintStart_toEndOf="@+id/poster_provinsi"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_status" />
+
+                <TextView
+                    android:id="@+id/txt_harga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Harga"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toEndOf="@+id/poster_provinsi"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_judul" />
+
             </LinearLayout>
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="12dp"
+            >
+
+            <TextView
+                android:id="@+id/txt_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Alamat"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/txt_drop_selengkap"
+                />
+
+            <TextView
+                android:id="@+id/txt_telpone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Telephone"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/txt_alamat"
+                />
+
+            <TextView
+                android:id="@+id/txt_keterangan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Keterangan"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/txt_telpone"
+                />
+
+            <TextView
+                android:id="@+id/txt_tgl_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="tanggal post"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/txt_keterangan"
+                />
         </LinearLayout>
 
     </LinearLayout>
@@ -94,7 +170,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
+        app:layout_constraintTop_toBottomOf="@+id/lr_card"
         tools:itemCount="10"
         tools:listitem="@layout/item_chat_other" />
 
@@ -110,16 +186,16 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/editTextText10"
+            android:id="@+id/edt_add_komen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="text"
-            android:text="Name" />
+            />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btn_send_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -30,14 +30,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
-
         preferences = Preference(this)
-
-//        binding.btnMasuk.setOnClickListener {
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.putExtra("EXTRA_ID", 2)
-//            startActivity(intent)
-//        }
 
         binding.llRegisterHere.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
