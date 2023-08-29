@@ -19,4 +19,14 @@ class Preference(val context: Context) {
     fun getValues(key: String): String? {
         return sharedPreferences.getString(key, "")
     }
+
+    fun setLoginInt(key: String, value: Int) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt(key, value)
+        editor.apply()
+    }
+
+    fun getValuesInt(key: String): Int? {
+        return sharedPreferences.getInt(key, 0)
+    }
 }

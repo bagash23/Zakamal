@@ -57,7 +57,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        extraId = requireActivity().intent.getIntExtra("EXTRA_ID", 1)
+        preference = Preference(requireActivity().applicationContext)
+        extraId = preference.getValuesInt("ID_ROLE") ?: 1
         if (extraId == 1) {
             isUser = false
         } else {
@@ -86,7 +87,12 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        preference = Preference(activity!!.applicationContext)
+        preference = Preference(requireActivity().applicationContext)
+        if (!isUser) {
+            binding.tvGreetingUser.setText(preference.getValues("NAMA_LENGKAP")) ?: "User"
+        } else {
+            bindingUser.tvGreetingUser.setText(preference.getValues("NAMA_LENGKAP")) ?: "User"
+        }
     }
 
     private fun getKomunitasAll(listView: ListView) {
@@ -124,7 +130,7 @@ class HomeFragment : Fragment() {
             }
 
 //            Log.d("TAG", "checkUser: ${preference.getValues("NAMA_LENGKAP")}")
-            binding.tvGreetingUser.setText(preference.getValues("NAMA_LENGKAP")) ?: "User"
+//            binding.tvGreetingUser.setText(preference.getValues("NAMA_LENGKAP")) ?: "User"
 
             val listView = bindingUser.komunitasHome
             getKomunitasAll(listView)

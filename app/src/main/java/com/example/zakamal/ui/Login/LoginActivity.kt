@@ -102,8 +102,8 @@ class LoginActivity : AppCompatActivity() {
                         preferences.setLogin("EMAIL", loginResponse.email)
                         preferences.setLogin("PASSWORD", loginResponse.password)
                         preferences.setLogin("ID_PROVINSI", loginResponse.idProvinsi.toString())
-                        preferences.setLogin("ID_ROLE", loginResponse.idRole.toString())
-                        intent.putExtra("EXTRA_ID", 2)
+                        preferences.setLoginInt("ID_ROLE", loginResponse.idRole)
+                        intent.putExtra("EXTRA_ID", 1)
                         startActivity(intent)
 
                     }
