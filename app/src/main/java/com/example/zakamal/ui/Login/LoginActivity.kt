@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.zakamal.MainActivity
 import com.example.zakamal.databinding.ActivityLoginBinding
+import com.example.zakamal.ui.Register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,6 +22,13 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        binding.llRegisterHere.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
     }
 }
