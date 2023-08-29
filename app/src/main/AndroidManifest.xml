@@ -3,7 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+
+    <uses-feature android:name="android.hardware.camera.any" />
+
 
     <application
         android:allowBackup="true"
@@ -15,7 +22,23 @@
         android:theme="@style/Theme.Zakamal"
         tools:targetApi="33">
         <activity
-            android:name=".MonitoringResultProvinsiActivity"
+            android:name=".Camera.CameraActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Monitoring.MonitoringResultProvinsiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Community.CommunityComment.CommunityCommentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Community.CommunityAll.CommunityAllActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Request.RequestActivity"
             android:exported="false" />
         <activity
             android:name=".ui.Login.LoginActivity"
@@ -35,6 +58,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.zakamal.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
+
 
 </manifest>
