@@ -1,39 +1,36 @@
 package com.example.zakamal.BottomNav
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ListView
-import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.Toast
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.db.williamchart.view.BarChartView
 import com.example.zakamal.Provinsi.ProvinsiActivity
 import com.example.zakamal.R
+import com.example.zakamal.api.DomainApi
 import com.example.zakamal.databinding.FragmentMonitoringBinding
-import com.example.zakamal.dummy.DummyProvinsi
 import com.example.zakamal.dummy.DummyTahun
+import com.example.zakamal.model.monitoring.MonitoringResponse
 import com.example.zakamal.utils.CustomeArrayAdapterTahun
-import com.example.zakamal.utils.ProvinsiAdapter
+import com.example.zakamal.utils.MonitoringChartAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.time.Year
 
 class MonitoringFragment : Fragment() {
 
     private var _binding: FragmentMonitoringBinding? =null
     private val binding get() = _binding!!
-
     private var selectedProvinsiName: String? = null
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,29 +42,10 @@ class MonitoringFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val barChartView: BarChartView = binding.barChart
-        val animationDuration = 1000L
-        val barSet = listOf(
-            "JAN" to 4F,
-            "FEB" to 7F,
-            "MAR" to 2F,
-            "APR" to 2.3F,
-            "MAY" to 5F,
-            "JUN" to 4F,
-            "JUL" to 5F,
-            "AUG" to 2F,
-            "SEP" to 5F,
-            "OCT" to 4F,
-            "NOV" to 3F,
-            "DEC" to 5F
-
-        )
-
-        barChartView.animation.duration = animationDuration
-        barChartView.animate(barSet)
-
         val btnShowBottomSheet: Button = binding.btnClickProvinsi
         val btnShowBottomSheetTahun: Button = binding.btnClickTahun
+        val listDetailMonitoring: ListView = view.findViewById(R.id.monitoringListView)
+        val swipeRefreshLayout: SwipeRefreshLayout = binding.swipeRefreshPageMonitoring
 
         val currentYear = Year.now().value.toString()
         binding.btnClickTahun.text = currentYear
@@ -89,13 +67,24 @@ class MonitoringFragment : Fragment() {
             binding.txtMonitorProvinsi.text = it
         }
 
-
         val sharedYearPreferences = requireContext().getSharedPreferences("selectedYear", Context.MODE_PRIVATE)
         val selectedYear = sharedYearPreferences.getString("selectedYear", null)
         selectedYear?.let {
             binding.btnClickTahun.text = it
         }
 
+//        render chart
+        val dataProvinsi = selectedProvinsiName.toString()
+        val dataTahunan = selectedYear.toString()
+        getMonitoringZakat(dataProvinsi, dataTahunan, listDetailMonitoring)
+
+        swipeRefreshLayout.setOnRefreshListener {
+            val dataProvinsi = selectedProvinsiName.toString()
+            val dataTahunan = selectedYear.toString()
+            getMonitoringZakat(dataProvinsi, dataTahunan, listDetailMonitoring)
+            Toast.makeText(requireContext(), "Refresh Page", Toast.LENGTH_SHORT).show()
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun showBottomSheetDialog(initialSelectedYear: String) {
@@ -118,10 +107,7 @@ class MonitoringFragment : Fragment() {
         listView.setOnItemClickListener { parent, view, position, id ->
             val selectedTahun = tahunList[position]
             println("Selected Year: ${selectedTahun.name}")
-
-            // Update the text of the button
             binding.btnClickTahun.text = selectedTahun.name
-
             val sharedPreferences = requireContext().getSharedPreferences("selectedYear", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.putString("selectedYear", selectedTahun.name)
@@ -133,17 +119,42 @@ class MonitoringFragment : Fragment() {
         bottomSheetDialog.show()
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PROVINSI_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val selectedProvinsi = data?.getStringExtra("selectedProvinsi")
-            selectedProvinsi?.let {
-                binding.btnClickProvinsi.text = it
-                binding.txtMonitorProvinsi.text = it
-                selectedProvinsiName = it
+    private fun getMonitoringZakat(provinsi: String, tahun: String, listView: ListView) {
+        val monitoringCall = DomainApi.monitoringService.getMonitoring(provinsi, tahun)
+        monitoringCall.enqueue(object : Callback<List<MonitoringResponse>> {
+            override fun onResponse(call: Call<List<MonitoringResponse>>, response: Response<List<MonitoringResponse>>) {
+                if (response.isSuccessful) {
+                    val monitoringDataList = response.body()
+                    val chartData = createChartData(monitoringDataList)
+                    updateBarChart(chartData)
+                    listView.adapter = MonitoringChartAdapter(requireContext(), monitoringDataList)
+                } else {
+                    println("Response not successful: ${response.code()}")
+                }
             }
+
+            override fun onFailure(call: Call<List<MonitoringResponse>>, t: Throwable) {
+                println("error ${t.message}")
+            }
+        })
+    }
+
+    private fun createChartData(monitoringDataList: List<MonitoringResponse>?): List<Pair<String, Float>> {
+        return monitoringDataList?.map {
+            it.bulan?.take(3).orEmpty() to (it.totalKeseluruhan?.toFloat() ?: 0F)
+        } ?: emptyList()
+    }
+
+    private fun updateBarChart(chartData: List<Pair<String, Float>>) {
+        val barChartView: BarChartView = binding.barChart
+        val animationDuration = 1000L
+
+        barChartView.animation.duration = animationDuration
+
+        val chartEntries = chartData.map { (label, value) ->
+            Pair(label, value)
         }
+        barChartView.show(chartEntries)
     }
 
 
