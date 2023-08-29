@@ -9,31 +9,31 @@ import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.net.DnsResolver
+import android.net.DnsResolver.Callback
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.zakamal.R
+import com.example.zakamal.api.DomainApi
 import com.example.zakamal.databinding.FragmentHomeBinding
 import com.example.zakamal.databinding.FragmentHomeUserBinding
+import com.example.zakamal.model.monitoring.AllProvinsiData
 import com.example.zakamal.ui.Community.CommunityAll.CommunityAllActivity
 import com.example.zakamal.ui.Community.CommunityComment.CommunityCommentActivity
 import com.example.zakamal.ui.Request.RequestActivity
+import com.example.zakamal.utils.KomunitasHomeAdapter
+import com.example.zakamal.utils.MonitoringResultAdapter
 
 import com.google.android.gms.location.FusedLocationProviderClient
+import retrofit2.Call
+import retrofit2.Response
 import java.util.Locale
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? =null
@@ -69,7 +69,33 @@ class HomeFragment : Fragment() {
             getCurrentLocation()
 
         }
+
+        val listViewKomunitas: ListView = view.findViewById(R.id.komunitasHome)
+
         checkUser()
+        getKomunitasAll(listViewKomunitas)
+    }
+
+    private fun getKomunitasAll(listView: ListView) {
+        val allKomunitas = DomainApi.monitoringService.getAllPosttFeed()
+        allKomunitas.enqueue(object : retrofit2.Callback<List<AllProvinsiData>> {
+            override fun onResponse(
+                call: Call<List<AllProvinsiData>>,
+                response: Response<List<AllProvinsiData>>
+            ) {
+                if (response.isSuccessful) {
+                    val komunitasAlls = response.body()
+                    listView.adapter = KomunitasHomeAdapter(requireContext(), komunitasAlls!!)
+                } else {
+                    println("Response code error: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<AllProvinsiData>>, t: Throwable) {
+                println("Error ${t.message}")
+            }
+
+        })
     }
 
     private fun checkUser() {
@@ -95,10 +121,10 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
 
-            binding.llCommunityCard.setOnClickListener {
-                val intent = Intent(requireContext(), CommunityCommentActivity::class.java)
-                startActivity(intent)
-            }
+//            binding.llCommunityCard.setOnClickListener {
+//                val intent = Intent(requireContext(), CommunityCommentActivity::class.java)
+//                startActivity(intent)
+//            }
         }
     }
 

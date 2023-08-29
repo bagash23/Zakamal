@@ -26,5 +26,7 @@ interface Monitoring {
     fun getGambarByIdPost(
         @Path("id_post_feed") idPostFeed: Int
     )
+    @GET("v1/user/post_feed/all")
+    fun getAllPosttFeed(): Call<List<AllProvinsiData>>
 
 }
