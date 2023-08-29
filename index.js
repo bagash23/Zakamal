@@ -17,13 +17,16 @@ app.use('/', require('./dummy/mon_zakat'));
 app.use('/', require('./dummy/pezakat'));
 
 // Admin API
-app.use('/', require('./routes/admin/mon_zakat'));
-app.use('/', require('./routes/admin/provinsi'));
-app.use('/', require('./routes/admin/pezakat'));
+app.use('/v1', require('./routes/admin/mon_zakat'));
+app.use('/v1', require('./routes/admin/provinsi'));
+app.use('/v1', require('./routes/admin/pezakat'));
+app.use('/v1', require('./routes/admin/post_feed'));
 
 // Pezakat API
-app.use('/', require('./routes/user/auth'));
-app.use('/', require('./routes/user/pezakat'));
+app.use('/v1', require('./routes/user/auth'));
+app.use('/v1', require('./routes/user/pezakat'));
+app.use('/v1', require('./routes/user/post_feed'));
+app.use('/v1', require('./routes/user/komentar'));
 
 
 
