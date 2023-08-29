@@ -166,7 +166,7 @@
                 android:textColor="@color/white" />
 
             <LinearLayout
-                android:id="@+id/ll_register_here"
+                android:id="@+id/ll_login_here"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -176,14 +176,14 @@
                     android:id="@+id/textView24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Belum punya akun?"
+                    android:text="Sudah punya akun?"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/textView28"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daftar disini"
+                    android:text="Login disini"
                     android:textColor="@color/Primary_Blue_80" />
             </LinearLayout>
 
