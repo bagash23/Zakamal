@@ -19,6 +19,7 @@ import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zakamal.R
 import com.example.zakamal.api.DomainApi
 import com.example.zakamal.databinding.FragmentHomeBinding
