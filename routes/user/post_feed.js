@@ -20,7 +20,9 @@ router.get('/user/post_feed/all', (req, res) => {
     db.query(getAllPostFeedQuery, (getAllPostFeedError, allPostFeedRows) => {
         if (getAllPostFeedError) {
             console.error(getAllPostFeedError);
-            return res.status(500).send('Terjadi kesalahan saat mengambil post_feed');
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil post_feed'
+            });
         }
 
         res.status(200).json(allPostFeedRows);
@@ -39,48 +41,24 @@ router.get('/user/post_feed/:id_post_feed', (req, res) => {
         INNER JOIN role ON user.id_role = role.id_role
         WHERE post_feed.id_post_feed = ?
     `;
+
     db.query(getPostFeedQuery, [id_post_feed], (getPostFeedError, postFeedRows) => {
         if (getPostFeedError) {
             console.error(getPostFeedError);
-            return res.status(500).send('Terjadi kesalahan saat mengambil post_feed');
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil post_feed'
+            });
         }
 
         if (postFeedRows.length === 0) {
-            return res.status(404).send('Post feed tidak ditemukan');
+            return res.status(404).json({
+                message: 'Post feed tidak ditemukan'
+            });
         }
 
         res.status(200).json(postFeedRows[0]);
     });
 });
-
-// Get dokumen post_feed all
-// router.get('/user/post_feed/all/dokumen', (req, res) => {
-//     const getDokumenQuery = `
-//         SELECT dokumen
-//         FROM post_feed
-//     `;
-
-//     db.query(getDokumenQuery, (getDokumenError, dokumenRows) => {
-//         if (getDokumenError) {
-//             console.error(getDokumenError);
-//             return res.status(500).send('Terjadi kesalahan saat mengambil dokumen');
-//         }
-
-//         if (dokumenRows.length === 0) {
-//             return res.status(404).send('Dokumen tidak ditemukan');
-//         }
-
-//         const dokumen = dokumenRows[0].dokumen;
-
-//         res.writeHead(200, {
-//             'Content-Type': 'image/png', // 'application/pdf',
-//             // 'Content-Disposition': 'attachment; filename=dokumen.png', // 'attachment; filename=dokumen.pdf',
-//             'Content-Length': dokumen.length
-//         });
-        
-//         res.end(dokumen);
-//     });
-// });
 
 // Get dokumen post_feed by id_post_feed
 router.get('/user/post_feed/:id_post_feed/dokumen', (req, res) => {
@@ -91,45 +69,45 @@ router.get('/user/post_feed/:id_post_feed/dokumen', (req, res) => {
         FROM post_feed
         WHERE id_post_feed = ?
     `;
+
     db.query(getDokumenQuery, [id_post_feed], (getDokumenError, dokumenRows) => {
         if (getDokumenError) {
             console.error(getDokumenError);
-            return res.status(500).send('Terjadi kesalahan saat mengambil dokumen');
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil dokumen'
+            });
         }
 
         if (dokumenRows.length === 0) {
-            return res.status(404).send('Dokumen tidak ditemukan');
+            return res.status(404).json({
+                message: 'Dokumen tidak ditemukan'
+            });
         }
 
         const dokumen = dokumenRows[0].dokumen;
 
-        // Konversi BLOB ke base64
-        const base64Image = dokumen.toString('base64');
-
-        const baseUrl = 'https://5771-125-160-225-142.ngrok-free.app/v1';
-
-        const dokumenUrl = `${baseUrl}/user/post_feed/${id_post_feed}/dokumen`;
-
-        res.status(200).json({ dokumenUrlbase64Image });
-
-        
+        res.writeHead(200, { //application/pdf dan image/jpeg buat nampilin file pdf dan image
+            // 'Content-Type': 'image/jpeg',
+            'Content-Length': dokumen.length
+        });
+        res.end(dokumen);
     });
 });
-
-
 
 // Get post_feed by nama_provinsi
 router.get('/user/post_feed/provinsi/:nama_provinsi', (req, res) => {
     const { nama_provinsi } = req.params;
 
     const getPostFeedQuery = `
-        SELECT post_feed.id_post_feed, post_feed.id_user, post_feed.id_provinsi, post_feed.judul_post, post_feed.biaya, post_feed.alamat, post_feed.keterangan, post_feed.dokumen, post_feed.status, post_feed.tanggal_post, user.nama_lengkap, user.telepon, provinsi.nama_provinsi, role.nama_role
+        SELECT post_feed.id_post_feed, post_feed.id_user, post_feed.id_provinsi, post_feed.judul_post, post_feed.biaya, post_feed.alamat, post_feed.keterangan, post_feed.status, post_feed.tanggal_post, user.nama_lengkap, user.telepon, provinsi.nama_provinsi, role.nama_role
         FROM post_feed
         INNER JOIN user ON post_feed.id_user = user.id_user
         INNER JOIN provinsi ON post_feed.id_provinsi = provinsi.id_provinsi
         INNER JOIN role ON user.id_role = role.id_role
         WHERE provinsi.nama_provinsi = ?
+        ORDER BY post_feed.tanggal_post DESC
     `;
+
     db.query(getPostFeedQuery, [nama_provinsi], (getPostFeedError, postFeedRows) => {
         if (getPostFeedError) {
             console.error(getPostFeedError);
@@ -144,22 +122,9 @@ router.get('/user/post_feed/provinsi/:nama_provinsi', (req, res) => {
             });
         }
 
-        const baseUrl = 'https://5771-125-160-225-142.ngrok-free.app/v1';
-
-        // Mengubah array postFeedRows, termasuk penambahan dokumenUrl di setiap elemennya
-        const postFeedWithUrls = postFeedRows.map(row => {
-            const dokumenUrl = `${baseUrl}/user/post_feed/${row.id_post_feed}/dokumen`;
-            return {
-                ...row,
-                dokumenUrl
-            };
-        });
-
-        res.status(200).json(postFeedWithUrls);
+        res.status(200).json(postFeedRows);
     });
 });
-
-
 
 // Get dokumen pengajuan by id_post_feed
 router.get('/user/:id_user/post_feed/:id_post_feed/dokumen', (req, res) => {
@@ -174,20 +139,22 @@ router.get('/user/:id_user/post_feed/:id_post_feed/dokumen', (req, res) => {
     db.query(getDokumenQuery, [id_user, id_post_feed], (getDokumenError, dokumenRows) => {
         if (getDokumenError) {
             console.error(getDokumenError);
-            return res.status(500).send('Terjadi kesalahan saat mengambil dokumen');
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil dokumen'
+            });
         }
 
         if (dokumenRows.length === 0) {
-            return res.status(404).send('Dokumen tidak ditemukan');
+            return res.status(404).json({
+                message: 'Dokumen tidak ditemukan'
+            });
         }
 
         const dokumen = dokumenRows[0].dokumen;
 
         res.writeHead(200, { //application/pdf dan image/jpeg buat nampilin file pdf dan image
-            'Content-Type': 'image/jpeg',
+            // 'Content-Type': 'image/jpeg',
             'Content-Length': dokumen.length
-
-            
         });
         res.end(dokumen);
     });
@@ -211,11 +178,15 @@ router.post('/user/:id_user/post_feed/add', upload.single('dokumen'), (req, res)
     db.query(getUserInfoQuery, [id_user], (getUserError, userRows) => {
         if (getUserError) {
             console.error(getUserError);
-            return res.status(500).send('Terjadi kesalahan saat mengambil informasi user');
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil data user'
+            });
         }
 
         if (userRows.length === 0) {
-            return res.status(404).send('User tidak ditemukan');
+            return res.status(404).json({
+                message: 'User tidak ditemukan'
+            });
         }
 
         const nama = userRows[0].nama_lengkap;
@@ -234,11 +205,15 @@ router.post('/user/:id_user/post_feed/add', upload.single('dokumen'), (req, res)
         db.query(insertQuery, insertValues, (insertError, result) => {
             if (insertError) {
                 console.error(insertError);
-                return res.status(500).send('Terjadi kesalahan saat membuat posting');
+                return res.status(500).json({
+                    message: 'Terjadi kesalahan saat menyimpan post_feed'
+                });
             }
 
             const postId = result.insertId;
-            res.status(201).json({ message: 'Post berhasil dibuat', postId });
+            res.status(201).json({ 
+                message: 'Post berhasil dibuat', postId 
+            });
         });
     });
 });

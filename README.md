@@ -160,6 +160,19 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **Metode:** `POST`
 - **Respon:** Pesan sukses atau pesan error.
 
+#### Mengubah Data Status Post Feed berdasarkan ID Post Feed
+- **URL:** `/admin/post_feed/:id_post_feed/status`
+- **Param Path:** `id_post_feed`
+- **Body Input:** `status`
+- **Metode:** `PUT`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Menghapus Data Post Feed berdasarkan ID Post Feed
+- **URL:** `/admin/post_feed/delete/:id_post_feed`
+- **Param Path:** `id_post_feed`
+- **Metode:** `DELETE`
+- **Respon:** Pesan sukses atau pesan error.
+
 
 ## Lisensi
 

@@ -1,10 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../config');
-const multer = require('multer');
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
 
 
 // Get all post_feed
@@ -20,10 +16,60 @@ router.get('/admin/post_feed', (req, res) => {
     db.query(getAllPostFeedQuery, (getAllPostFeedError, allPostFeedRows) => {
         if (getAllPostFeedError) {
             console.error(getAllPostFeedError);
-            return res.status(500).send('Terjadi kesalahan saat mengambil post_feed');
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil post_feed'
+            });
         }
 
         res.status(200).json(allPostFeedRows);
+    });
+});
+
+// Update status post_feed by id_post_feed
+router.put('/admin/post_feed/:id_post_feed/status', (req, res) => {
+    const { id_post_feed } = req.params;
+    const { status } = req.body;
+
+    const updateStatusPostFeedQuery = `
+        UPDATE post_feed
+        SET status = ?
+        WHERE id_post_feed = ?
+    `;
+
+    db.query(updateStatusPostFeedQuery, [status, id_post_feed], (updateStatusPostFeedError, updateStatusPostFeedResult) => {
+        if (updateStatusPostFeedError) {
+            console.error(updateStatusPostFeedError);
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengubah status post_feed'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Status post_feed berhasil diubah'
+        });
+    });
+});
+
+// Delete post_feed by id_post_feed
+router.delete('/admin/post_feed/delete/:id_post_feed', (req, res) => {
+    const { id_post_feed } = req.params;
+
+    const deletePostFeedQuery = `
+        DELETE FROM post_feed
+        WHERE id_post_feed = ?
+    `;
+
+    db.query(deletePostFeedQuery, [id_post_feed], (deletePostFeedError, deletePostFeedResult) => {
+        if (deletePostFeedError) {
+            console.error(deletePostFeedError);
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat menghapus post_feed'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Post feed berhasil dihapus'
+        });
     });
 });
 
