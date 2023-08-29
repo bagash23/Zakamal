@@ -29,8 +29,8 @@ class CommunityCommentAdapter(private val itemList: List<CommunityItem>) : Recyc
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Declare and initialize the views in the item layout
-        private val textViewTitle: TextView = itemView.findViewById(R.id.tv_nama_orang)
-        private val textViewKomentar: TextView = itemView.findViewById(R.id.tv_item_comment_other)
+        private val textViewTitle: TextView = itemView.findViewById(R.id.tv_item_comment_other)
+        private val textViewKomentar: TextView = itemView.findViewById(R.id.tv_nama_orang)
         private val other: ImageView = itemView.findViewById(R.id.iv_comment_other)
 
         fun bind(item: CommunityItem) {
