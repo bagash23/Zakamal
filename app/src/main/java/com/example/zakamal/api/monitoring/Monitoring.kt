@@ -1,11 +1,12 @@
 package com.example.zakamal.api.monitoring
 
 import com.example.zakamal.model.monitoring.AllProvinsiData
-import com.example.zakamal.model.monitoring.MonitoringGambarResponse
+import com.example.zakamal.model.monitoring.KomentarResponse
 import com.example.zakamal.model.monitoring.MonitoringResponse
 import com.example.zakamal.model.monitoring.ProvinsiResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface Monitoring {
@@ -28,5 +29,16 @@ interface Monitoring {
     )
     @GET("v1/user/post_feed/all")
     fun getAllPosttFeed(): Call<List<AllProvinsiData>>
+
+    @GET("v1/user/post_feed/{id_post_feed}")
+    fun getByIDPost(
+        @Path("id_post_feed") idPostFeed: Int
+    ): Call<AllProvinsiData>
+
+//    get komentar
+    @GET("v1//user/{id_post_feed}/komentar")
+    fun getKomentarByID(
+    @Path("id_post_feed") idPostFeed: Int,
+    ) : Call<List<KomentarResponse>>
 
 }
