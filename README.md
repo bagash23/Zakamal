@@ -176,7 +176,7 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 #### Menambahkan Data Komentar berdasarkan ID User dan ID Post Feed
 - **URL:** `/user/:id_user/:id_post_feed/komentar/add`
 - **Param Path:** `id_user`
-- **Body Input:** `id_user` dan `id_post_feed`
+- **Body Input:** `komentar`
 - **Metode:** `POST`
 - **Respon:** Pesan sukses atau pesan error.
 
