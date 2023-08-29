@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 class ProvinsiResponse {
 
     @SerializedName("id_provinsi")
-    val id_provinsi: String? = null
+    val id_provinsi: Int? = null
 
     @SerializedName("nama_provinsi")
     val nama_provinsi: String ? = null

@@ -21,6 +21,7 @@ import com.example.zakamal.model.monitoring.MonitoringResponse
 import com.example.zakamal.utils.CustomeArrayAdapterTahun
 import com.example.zakamal.utils.MonitoringChartAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import okhttp3.internal.notify
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,6 +40,8 @@ class MonitoringFragment : Fragment() {
         _binding = FragmentMonitoringBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,14 +63,16 @@ class MonitoringFragment : Fragment() {
         }
 
         // Load selected provinsi from SharedPreferences
-        val sharedPreferences = requireContext().getSharedPreferences("selectedProvinsi", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            requireContext().getSharedPreferences("selectedProvinsi", Context.MODE_PRIVATE)
         selectedProvinsiName = sharedPreferences.getString("selectedProvinsi", null)
         selectedProvinsiName?.let {
             binding.btnClickProvinsi.text = it
             binding.txtMonitorProvinsi.text = it
         }
 
-        val sharedYearPreferences = requireContext().getSharedPreferences("selectedYear", Context.MODE_PRIVATE)
+        val sharedYearPreferences =
+            requireContext().getSharedPreferences("selectedYear", Context.MODE_PRIVATE)
         val selectedYear = sharedYearPreferences.getString("selectedYear", null)
         selectedYear?.let {
             binding.btnClickTahun.text = it
@@ -84,6 +89,7 @@ class MonitoringFragment : Fragment() {
             getMonitoringZakat(dataProvinsi, dataTahunan, listDetailMonitoring)
             Toast.makeText(requireContext(), "Refresh Page", Toast.LENGTH_SHORT).show()
             swipeRefreshLayout.isRefreshing = false
+
         }
     }
 
@@ -128,6 +134,7 @@ class MonitoringFragment : Fragment() {
                     val chartData = createChartData(monitoringDataList)
                     updateBarChart(chartData)
                     listView.adapter = MonitoringChartAdapter(requireContext(), monitoringDataList)
+                    updateBarChart(chartData)
                 } else {
                     println("Response not successful: ${response.code()}")
                 }

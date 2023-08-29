@@ -20,6 +20,7 @@ import retrofit2.Response
 class ProvinsiActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPreferencesId: SharedPreferences
     private var selectedProvinsiName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,7 @@ class ProvinsiActivity : AppCompatActivity() {
         setContentView(R.layout.activity_provinsi)
 
         sharedPreferences = getSharedPreferences("selectedProvinsi", Context.MODE_PRIVATE)
+        sharedPreferencesId = getSharedPreferences("numberProvinsi", Context.MODE_PRIVATE)
         selectedProvinsiName = sharedPreferences.getString("selectedProvinsi", null)
 
         val listView: ListView = findViewById(R.id.provinsiListView)
@@ -47,6 +49,7 @@ class ProvinsiActivity : AppCompatActivity() {
 
                         listView.setOnItemClickListener { parent, view, position, id ->
                             val clickedProvinsiName = provinsiList[position].nama_provinsi
+                            val numberProvinsi = provinsiList[position].id_provinsi
 
                             if (clickedProvinsiName != null) {
                                 Log.d("PROVINSI", clickedProvinsiName)
@@ -54,6 +57,9 @@ class ProvinsiActivity : AppCompatActivity() {
 
                             if (selectedProvinsiName != clickedProvinsiName) {
                                 sharedPreferences.edit().putString("selectedProvinsi", clickedProvinsiName).apply()
+                                if (numberProvinsi != null) {
+                                    sharedPreferencesId.edit().putInt("numberProvinsi", numberProvinsi).apply()
+                                }
                                 selectedProvinsiName = clickedProvinsiName
                                 adapter.notifyDataSetChanged()
 
