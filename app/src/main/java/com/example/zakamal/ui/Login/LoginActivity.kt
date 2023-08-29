@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnMasuk.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("EXTRA_ID", 2)
+            intent.putExtra("EXTRA_ID", 1)
             startActivity(intent)
         }
 

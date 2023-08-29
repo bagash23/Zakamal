@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Community.CommunityComment.CommunityCommentActivity">
+    tools:context=".ui.AdminPostingan.AdminPostinganChangeStatusActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout7"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_back_comment"
+            android:id="@+id/iv_back_postingan_change_status"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:paddingStart="30dp"
@@ -36,8 +36,9 @@
 
     </LinearLayout>
 
+
     <LinearLayout
-        android:id="@+id/linearLayout8"
+        android:id="@+id/ll_postingan_admin_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/Primary_Blue_80"
@@ -67,14 +68,20 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/tv_status_postingan_admin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/tv_item_community_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/card_community_desc"
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/tv_item_community_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -87,15 +94,84 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chat"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
-        tools:itemCount="10"
-        tools:listitem="@layout/item_chat_other" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_postingan_admin_card">
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alamat" />
+
+        <EditText
+            android:id="@+id/editTextText6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Alamat"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Biaya" />
+
+        <EditText
+            android:id="@+id/editTextText7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Biaya"
+            android:inputType="text"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Telphon" />
+
+        <EditText
+            android:id="@+id/editTextTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="No telp"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keterangan" />
+
+        <EditText
+            android:id="@+id/editTextText8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="keterangan"
+            android:inputType="text"
+            android:text="Name" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Terima" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tolak" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

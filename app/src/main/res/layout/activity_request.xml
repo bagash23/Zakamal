@@ -192,12 +192,6 @@
                     android:text="Masukan File Pendukung" />
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_preview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_profile_active" />
-
             <Button
                 android:id="@+id/button4"
                 android:layout_width="match_parent"

@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Nama Lengkap"
+                android:textColor="@color/black"
                 android:textColorHighlight="@color/black" />
 
             <EditText
@@ -80,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Telepone"
+                android:textColor="@color/black"
                 android:textColorHighlight="@color/black" />
 
             <EditText

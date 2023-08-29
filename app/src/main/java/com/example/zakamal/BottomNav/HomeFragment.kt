@@ -24,6 +24,7 @@ import com.example.zakamal.api.DomainApi
 import com.example.zakamal.databinding.FragmentHomeBinding
 import com.example.zakamal.databinding.FragmentHomeUserBinding
 import com.example.zakamal.model.monitoring.AllProvinsiData
+import com.example.zakamal.ui.AdminPostingan.AdminPostinganActivity
 import com.example.zakamal.ui.Community.CommunityAll.CommunityAllActivity
 import com.example.zakamal.ui.Community.CommunityComment.CommunityCommentActivity
 import com.example.zakamal.ui.Request.RequestActivity
@@ -75,11 +76,8 @@ class HomeFragment : Fragment() {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
         } else {
             getCurrentLocation()
-
         }
-
         checkUser()
-
     }
 
     private fun getKomunitasAll(listView: ListView) {
@@ -124,6 +122,24 @@ class HomeFragment : Fragment() {
         } else {
             binding.tvHomeSeeAll.setOnClickListener {
                 val intent = Intent(requireContext(), CommunityAllActivity::class.java)
+                startActivity(intent)
+            }
+
+            binding.llKeterimaPostingan.setOnClickListener {
+                val intent = Intent(requireContext(), AdminPostinganActivity::class.java)
+                intent.putExtra("EXTRA_STATUS_POSTINGAN", "KETERIMA")
+                startActivity(intent)
+            }
+
+            binding.llPostinganPending.setOnClickListener {
+                val intent = Intent(requireContext(), AdminPostinganActivity::class.java)
+                intent.putExtra("EXTRA_STATUS_POSTINGAN", "DIPROSES")
+                startActivity(intent)
+            }
+
+            binding.llPostinganDitolak.setOnClickListener {
+                val intent = Intent(requireContext(), AdminPostinganActivity::class.java)
+                intent.putExtra("EXTRA_STATUS_POSTINGAN", "DITOLAK")
                 startActivity(intent)
             }
 

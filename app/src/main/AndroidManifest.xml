@@ -8,14 +8,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <uses-feature android:name="android.hardware.camera.any" />
-
 
     <application
         android:allowBackup="true"
-        android:debuggable="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:debuggable="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,9 +21,14 @@
         android:theme="@style/Theme.Zakamal"
         tools:targetApi="33">
         <activity
+            android:name=".ui.AdminPostingan.AdminPostinganChangeStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.AdminPostingan.AdminPostinganActivity"
+            android:exported="false" />
+        <activity
             android:name=".Camera.CameraActivity"
             android:exported="false" />
-
         <activity
             android:name=".Monitoring.MonitoringResultProvinsiActivity"
             android:exported="false" />
@@ -59,6 +62,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.zakamal.fileprovider"
@@ -68,8 +72,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
     </application>
-
 
 </manifest>

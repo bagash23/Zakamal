@@ -1,5 +1,6 @@
 package com.example.zakamal.BottomNav
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -41,8 +42,6 @@ class MonitoringFragment : Fragment() {
         _binding = FragmentMonitoringBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -94,7 +93,8 @@ class MonitoringFragment : Fragment() {
         }
     }
 
-    private fun showBottomSheetDialog(initialSelectedYear: String) {
+    private fun
+            showBottomSheetDialog(initialSelectedYear: String) {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         val contentView = layoutInflater.inflate(R.layout.layout_bottom_sheet_tahun, null)
         val tahunList = DummyTahun.createDummyListTahun()
@@ -120,11 +120,14 @@ class MonitoringFragment : Fragment() {
             editor.putString("selectedYear", selectedTahun.name)
             editor.apply()
             bottomSheetDialog.dismiss()
+
         }
 
         bottomSheetDialog.setContentView(contentView)
         bottomSheetDialog.show()
     }
+
+
 
     private fun getMonitoringZakat(provinsi: String, tahun: String, listView: ListView) {
         val monitoringCall = DomainApi.monitoringService.getMonitoring(provinsi, tahun)

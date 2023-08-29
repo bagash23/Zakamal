@@ -18,6 +18,16 @@ import com.example.zakamal.databinding.ActivityRequestBinding
 import com.example.zakamal.utils.Constant
 import com.example.zakamal.utils.Constant.Companion.CAMERA_REQUEST_CODE
 import androidx.appcompat.widget.AppCompatImageView
+import com.example.zakamal.api.DomainApi
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 
 
 class RequestActivity : AppCompatActivity() {
@@ -45,15 +55,20 @@ class RequestActivity : AppCompatActivity() {
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val imageUri = data?.getParcelableExtra<Uri>("imageResult")
             // Do something with the captured image URI
-            Log.d(TAG, "onActivityResult: $imageUri")
-
-            if (imageUri != null) {
-                (binding.ivPreview as AppCompatImageView).setImageURI(imageUri)
-            } else {
-                Toast.makeText(this, "Error: Image URI is null", Toast.LENGTH_SHORT).show()
-            }
 
         }
+
+//        binding.btnSubmit.setOnClickListener {
+//            val userId = intent.getStringExtra("userId")
+//            val idProvinsi = binding.etProvinsi.text.toString().toInt()
+//            val judulPost = binding.etJudul.text.toString()
+//            val biaya = binding.etBiaya.text.toString().toInt()
+//            val alamat = binding.etAlamat.text.toString()
+//            val keterangan = binding.etKeterangan.text.toString()
+//            val dokumenFile = File(binding.ivPreview.toString())
+//
+//            createUserPost(userId!!, idProvinsi, judulPost, biaya, alamat, keterangan, dokumenFile)
+//        }
     }
 
 

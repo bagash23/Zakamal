@@ -6,6 +6,7 @@ import com.example.zakamal.api.monitoring.Monitoring
 import com.example.zakamal.api.register.Register
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 object DomainApi {
     private const val BASE_URL = "https://b349-125-160-225-142.ngrok-free.app/"
@@ -17,4 +18,5 @@ object DomainApi {
     val monitoringService: Monitoring = retrofit.create(Monitoring::class.java)
     val registerService: Register = retrofit.create(Register::class.java)
     val loginService: Login = retrofit.create(Login::class.java)
+
 }

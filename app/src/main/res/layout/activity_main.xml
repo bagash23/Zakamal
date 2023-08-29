@@ -12,14 +12,14 @@
         android:id="@+id/layout_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintBottom_toTopOf="@+id/ll_postingan_pending"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="NotSibling,UnknownId"/>
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/ll_postingan_pending"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="1dp"
