@@ -12,6 +12,7 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.db.williamchart.view.BarChartView
+import com.example.zakamal.Monitoring.MonitoringResultProvinsiActivity
 import com.example.zakamal.Provinsi.ProvinsiActivity
 import com.example.zakamal.R
 import com.example.zakamal.api.DomainApi
@@ -126,6 +127,18 @@ class MonitoringFragment : Fragment() {
                 if (response.isSuccessful) {
                     val monitoringDataList = response.body()
                     val chartData = createChartData(monitoringDataList)
+
+                    if (monitoringDataList!!.isEmpty()) {
+                        binding.txtLihatAll.visibility = View.GONE
+                    } else {
+                        binding.txtLihatAll.visibility = View.VISIBLE
+                        binding.txtLihatAll.setOnClickListener {
+                            val intent = Intent(context, MonitoringResultProvinsiActivity::class.java)
+                            startActivity(intent)
+
+                        }
+                    }
+
                     updateBarChart(chartData)
                     listView.adapter = MonitoringChartAdapter(requireContext(), monitoringDataList)
                 } else {

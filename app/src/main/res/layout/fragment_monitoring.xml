@@ -158,10 +158,24 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="0dp"
+            android:divider="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/headerListView" />
+
+        <TextView
+            android:id="@+id/txt_lihat_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:text="Lihat Selengkapnya"
+            android:textSize="12sp"
+            android:textColor="@color/Primary_Blue_80"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
