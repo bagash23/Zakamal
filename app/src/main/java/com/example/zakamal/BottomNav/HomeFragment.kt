@@ -42,7 +42,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val bindingUser get() = _bindingUser!!
 
-    var isUser = true
+    private var isUser = false
+    private var extraId = 1
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -51,6 +52,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        extraId = requireActivity().intent.getIntExtra("EXTRA_ID", 1)
+        if (extraId == 1) {
+            isUser = false
+        } else {
+            isUser = true
+        }
+
         if (!isUser) {
             _binding = FragmentHomeBinding.inflate(inflater, container, false)
             return binding.root

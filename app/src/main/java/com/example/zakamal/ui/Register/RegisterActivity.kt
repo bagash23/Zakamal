@@ -15,6 +15,7 @@ import com.example.zakamal.api.register.RegisterRequestBody
 import com.example.zakamal.databinding.ActivityRegisterBinding
 import com.example.zakamal.model.monitoring.MonitoringResponse
 import com.example.zakamal.model.register.RegisterResponse
+import com.example.zakamal.ui.Login.LoginActivity
 import com.example.zakamal.utils.MonitoringChartAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -112,7 +113,15 @@ class RegisterActivity : AppCompatActivity() {
             Log.d("Register", registerRequest.toString())
 
             postRegister(registerRequest)
+        }
 
+        binding.ivBackRegister.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.llLoginHere.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
 
     }

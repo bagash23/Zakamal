@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -44,6 +45,7 @@ class RequestActivity : AppCompatActivity() {
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val imageUri = data?.getParcelableExtra<Uri>("imageResult")
             // Do something with the captured image URI
+            Log.d(TAG, "onActivityResult: $imageUri")
 
             if (imageUri != null) {
                 (binding.ivPreview as AppCompatImageView).setImageURI(imageUri)
