@@ -12,6 +12,7 @@ import android.location.Location
 import android.net.DnsResolver
 import android.net.DnsResolver.Callback
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,7 @@ import com.example.zakamal.ui.Community.CommunityComment.CommunityCommentActivit
 import com.example.zakamal.ui.Request.RequestActivity
 import com.example.zakamal.utils.KomunitasHomeAdapter
 import com.example.zakamal.utils.MonitoringResultAdapter
+import com.example.zakamal.utils.Preference
 
 import com.google.android.gms.location.FusedLocationProviderClient
 import retrofit2.Call
@@ -48,6 +50,7 @@ class HomeFragment : Fragment() {
     private var extraId = 1
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var preference: Preference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,6 +84,11 @@ class HomeFragment : Fragment() {
         checkUser()
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        preference = Preference(activity!!.applicationContext)
+    }
+
     private fun getKomunitasAll(listView: ListView) {
         val allKomunitas = DomainApi.monitoringService.getAllPosttFeed()
         allKomunitas.enqueue(object : retrofit2.Callback<List<AllProvinsiData>> {
@@ -110,11 +118,13 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
 
-
             bindingUser.llRequest.setOnClickListener {
                 val intent = Intent(requireContext(), RequestActivity::class.java)
                 startActivity(intent)
             }
+
+//            Log.d("TAG", "checkUser: ${preference.getValues("NAMA_LENGKAP")}")
+            binding.tvGreetingUser.setText(preference.getValues("NAMA_LENGKAP")) ?: "User"
 
             val listView = bindingUser.komunitasHome
             getKomunitasAll(listView)
