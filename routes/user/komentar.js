@@ -3,6 +3,30 @@ const router = express.Router();
 const db = require('../../config');
 
 
+// Get all komentar by id_post_feed
+router.get('/user/:id_post_feed/komentar', (req, res) => {
+    const { id_post_feed } = req.params;
+
+    const getAllKomentarQuery = `
+        SELECT *
+        FROM komentar
+        WHERE id_post_feed = ?
+        ORDER BY tanggal_komentar DESC
+    `;
+    db.query(getAllKomentarQuery, [id_post_feed], (getAllKomentarError, allKomentarRows) => {
+        if (getAllKomentarError) {
+            console.error(getAllKomentarError);
+            
+            res.status(500).json({
+                message: 'Terjadi kesalahan: ' + getAllKomentarError.message
+            });
+            return;
+        }
+
+        res.status(200).json(allKomentarRows);
+    });
+});
+
 // Post data komentar by id_post_feed
 router.post('/user/:id_user/:id_post_feed/komentar/add', (req, res) => {
     const { id_user, id_post_feed } = req.params;

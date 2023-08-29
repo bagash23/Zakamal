@@ -36,6 +36,7 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **Metode:** `DELETE`
 - **Respon:** Pesan sukses atau pesan error.
 
+
 ### Admin
 
 ### Data Provinsi
@@ -43,32 +44,33 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 #### Mendapatkan Semua Data Provinsi
 - **URL:** `/admin/provinsi`
 - **Metode:** `GET`
-- **Respon:** Data zakat atau pesan error.
+- **Respon:** Pesan sukses atau pesan error.
 
 #### Mendapatkan Data Provinsi berdasarkan ID Provinsi
 - **URL:** `/admin/provinsi/:id_provinsi`
 - **Param Path:** `id_provinsi`
 - **Metode:** `GET`
-- **Respon:** Data zakat atau pesan error.
+- **Respon:** Pesan sukses atau pesan error.
 
 #### Menambahkan Data Provinsi
 - **URL:** `/admin/provinsi/add`
 - **Body Input:** `nama_provinsi`
 - **Metode:** `POST`
-- **Respon:** Data zakat atau pesan error.
+- **Respon:** Pesan sukses atau pesan error.
 
 #### Mengubah Data Provinsi berdasarkan ID Provinsi
 - **URL:** `/admin/provinsi/update/:id_provinsi`
 - **Param Path:** `id_provinsi`
 - **Body Input:** `nama_provinsi`
 - **Metode:** `PUT`
-- **Respon:** Data zakat atau pesan error.
+- **Respon:** Pesan sukses atau pesan error.
 
 #### Menghapus Data Provinsi berdasarkan ID Provinsi
 - **URL:** `/admin/provinsi/delete/:id_provinsi`
 - **Param Path:** `id_provinsi`
 - **Metode:** `DELETE`
-- **Respon:** Data zakat atau pesan error.
+- **Respon:** Pesan sukses atau pesan error.
+
 
 #### Monitoring Data Zakat
 
@@ -76,13 +78,13 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **URL:** `/admin/monitoring-zakat/provinsi/:nama_provinsi`
 - **Param Path:** `nama_provinsi`
 - **Metode:** `GET`
-- **Respon:** Data zakat atau pesan error.
+- **Respon:** Pesan sukses atau pesan error.
 
 #### Mendapatkan Data Zakat berdasarkan Nama Provinsi dan Tahun
 - **URL:** `/admin/monitoring-zakat/provinsi/:nama_provinsi/tahun/:tahun`
 - **Param Path:** `nama_provinsi` dan `tahun`
 - **Metode:** `GET`
-- **Respon:** Data zakat atau pesan error.
+- **Respon:** Pesan sukses atau pesan error.
 
 #### Menambahkan Data Zakat Baru
 - **URL:** `/admin/monitoring-zakat/add`
@@ -102,6 +104,62 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **Param Path:** `id_mon_zakat`
 - **Metode:** `DELETE`
 - **Respon:** Pesan sukses atau pesan error.
+
+
+#### Posting Feed/Pengajuan
+
+#### Mendapatkan Data Semua Post Feed
+- **Param Path:** `/user/post_feed/all`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapakan Data Post Feed berdasarkan ID Post Feed
+- **URL:** `/user/post_feed/:id_post_feed`
+- **Param Path:** `id_post_feed`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapatkan Data Post Feed berdasarkan Nama Provinsi
+- **URL:** `/user/post_feed/provinsi/:nama_provinsi`
+- **Param Path:** `nama_provinsi`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapatkan Dokumen Post Feed berdasarkan ID Post Feed
+- **URL:** `/user/post_feed/:id_post_feed/dokumen`
+- **Param Path:** `id_post_feed`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapatkan Dokumen Post Feed berdasarkan ID User dan ID Post Feed
+- **URL:** `/user/:id_user/post_feed/:id_post_feed/dokumen`
+- **Param Path:** `id_user` dan `id_post_feed`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Menambahkan Data Post Feed berdasarkan ID User
+- **URL:** `/user/:id_user/post_feed/add`
+- **Param Path:** `id_user`
+- **Body Input:** `id_provinsi`, `judul_post`, `biaya`, `alamat`, `keterangan` dan `dokumen`
+- **Metode:** `POST`
+- **Respon:** Pesan sukses atau pesan error.
+
+
+#### Komentar pada Post Feed
+
+#### Mendapatkan Data Komentar berdasarkan ID Post Feed
+- **URL:** `/user/:id_post_feed/komentar`
+- **Param Path:** `id_post_feed`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Menambahkan Data Komentar berdasarkan ID User dan ID Post Feed
+- **URL:** `/user/:id_user/:id_post_feed/komentar/add`
+- **Param Path:** `id_user`
+- **Body Input:** `id_user` dan `id_post_feed`
+- **Metode:** `POST`
+- **Respon:** Pesan sukses atau pesan error.
+
 
 ## Lisensi
 

@@ -30,7 +30,7 @@ router.get('/pezakat/:id_pezakat', (req, res) => {
 });
 
 // Update data pezakat by id
-router.put('/pezakat/update/:id_pezakat', (req, res) => {
+router.put('/pezakat/profile/update/:id_pezakat', (req, res) => {
     const inputIdPezakat = req.params.id_pezakat;
 
     const { nama_lengkap, telepon, email, id_provinsi } = req.body;
