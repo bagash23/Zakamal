@@ -107,13 +107,16 @@
             android:id="@+id/textView31"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Alamat" />
+            android:fontFamily="@font/poppins_regular"
+            android:text="Alamat"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/editTextText6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/poppins_regular"
             android:hint="Alamat"
             android:inputType="text" />
 
@@ -121,28 +124,33 @@
             android:id="@+id/textView32"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Biaya" />
+            android:fontFamily="@font/poppins_regular"
+            android:text="Biaya"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/editTextText7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/poppins_regular"
             android:hint="Biaya"
-            android:inputType="text"
-            android:text="Name" />
+            android:inputType="text" />
 
         <TextView
             android:id="@+id/textView33"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No Telphon" />
+            android:fontFamily="@font/poppins_regular"
+            android:text="No Telphon"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/editTextTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/poppins_regular"
             android:hint="No telp"
             android:inputType="textPassword" />
 
@@ -150,28 +158,39 @@
             android:id="@+id/textView34"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Keterangan" />
+            android:fontFamily="@font/poppins_regular"
+            android:text="Keterangan"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/editTextText8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/poppins_regular"
             android:hint="keterangan"
-            android:inputType="text"
-            android:text="Name" />
+            android:inputType="text" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Terima" />
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="30dp"
+            android:background="@drawable/bg_button_green"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Terima"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tolak" />
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/bg_button_red"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Tolak"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
