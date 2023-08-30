@@ -17,7 +17,7 @@ class AllProvinsiData {
     val judul_post: String ? = null
 
     @SerializedName("biaya")
-    val biaya: Int ? = null
+    val biaya: String ? = null
 
     @SerializedName("alamat")
     val alamat : String ? = null
