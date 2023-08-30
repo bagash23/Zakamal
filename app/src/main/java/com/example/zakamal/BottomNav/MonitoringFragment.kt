@@ -127,8 +127,6 @@ class MonitoringFragment : Fragment() {
         bottomSheetDialog.show()
     }
 
-
-
     private fun getMonitoringZakat(provinsi: String, tahun: String, listView: ListView) {
         val monitoringCall = DomainApi.monitoringService.getMonitoring(provinsi, tahun)
         monitoringCall.enqueue(object : Callback<List<MonitoringResponse>> {

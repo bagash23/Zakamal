@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ActionMode
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -118,6 +119,15 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        sharedPreferencesId = this.getSharedPreferences("selectedProvinsi", Context.MODE_PRIVATE)
+        val selectedProvinsiName = sharedPreferencesId.getString("selectedProvinsi", null)
+        selectedProvinsiName?.let {
+            binding.btnSelectProvinsi.text = it
+        }
+    }
+
     private fun postRegister(registerRequest: RegisterRequestBody) {
         val sendRegister = DomainApi.registerService.postRegister(registerRequest)
 
@@ -131,6 +141,7 @@ class RegisterActivity : AppCompatActivity() {
                     registerResponse?.let {
                         val message: String? = registerResponse.message
                         Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_SHORT).show()
+                        finish()
                     }
                 } else {
                     val message: String = response.message()
