@@ -33,7 +33,7 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center_vertical"
             android:paddingStart="10dp"
-            android:text="Pengajuan zakat"
+            android:text="Pengajuan Bantuan"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
@@ -70,9 +70,9 @@
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
                 android:fontFamily="@font/poppins_regular"
+                android:hint="Judul"
                 android:inputType="text"
                 android:padding="10dp"
-                android:text="Renovasi Mesjid"
                 android:textColor="@color/black" />
 
             <TextView
@@ -90,9 +90,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
+                android:hint="Alamat"
                 android:inputType="text"
                 android:padding="10dp"
-                android:text="Jakarta Barat, Indonesia"
                 android:textColor="@color/black" />
 
             <TextView
@@ -111,10 +111,9 @@
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
                 android:fontFamily="@font/poppins_regular"
+                android:hint="Jenis Permohonan"
                 android:inputType="text"
-                android:padding="10dp"
-                android:text="Zakat Maal"
-                android:textColor="@color/black" />
+                android:padding="10dp" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -132,10 +131,9 @@
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
                 android:fontFamily="@font/poppins_regular"
+                android:hint="Biaya Yang dibutuhkan"
                 android:inputType="text"
-                android:padding="10dp"
-                android:text="IDR. 200.000.000"
-                android:textColor="@color/black" />
+                android:padding="10dp" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -153,9 +151,9 @@
                 android:background="@drawable/edit_text_border"
                 android:ems="10"
                 android:fontFamily="@font/poppins_regular"
+                android:hint="Keterangan"
                 android:inputType="text"
                 android:padding="10dp"
-                android:text="Bantu merapihkan ruangan belajar untuk anak yatim piatu karena kondisi sudah tidak kondusif"
                 android:textColor="@color/black" />
 
             <LinearLayout

@@ -148,7 +148,7 @@
                     android:id="@+id/tv_title_card1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Keterima"
+                    android:text="Bulan"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -156,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="bottom"
-                    android:text="0"
+                    android:text="January"
                     android:textColor="@color/Primary_Blue_80"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -181,7 +181,7 @@
                     android:id="@+id/tv_title_card2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ditolak"
+                    android:text="Pemasukan"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -212,7 +212,7 @@
                     android:id="@+id/tv_title_card3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pending"
+                    android:text="Pengeluaran"
                     android:textColor="@color/black" />
 
                 <TextView

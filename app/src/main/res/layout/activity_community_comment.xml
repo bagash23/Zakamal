@@ -30,9 +30,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/poppins_bold"
             android:gravity="center_vertical"
             android:paddingStart="10dp"
-            android:text="Pengajuan zakat" />
+            android:text="Komunitas ZakAmal"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 
@@ -190,8 +192,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/edit_text_border"
+            android:background="@drawable/bg_text_commend"
             android:ems="10"
+            android:hint="Beri komentar Anda"
             android:inputType="text"
             android:padding="10dp" />
 

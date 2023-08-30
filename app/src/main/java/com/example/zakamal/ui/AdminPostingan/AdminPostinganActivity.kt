@@ -86,6 +86,10 @@ class AdminPostinganActivity : AppCompatActivity() {
 //            binding.tvStatusPostinganAdmin.setTextColor(resources.getColor(R.color.Primary_Red))
 //        }
 
+        binding.ivBackPostinganAdmin.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 
 }

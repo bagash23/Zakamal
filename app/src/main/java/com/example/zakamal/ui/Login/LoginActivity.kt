@@ -38,8 +38,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val loginRequest = LoginRequestBody(
-            email = "admin@mail.com",
-            password = "admin123"
+            email = "hayhhw@gmail.com",
+            password = "passwordnic"
         )
 
         binding.etEmail.setText(loginRequest.email)
