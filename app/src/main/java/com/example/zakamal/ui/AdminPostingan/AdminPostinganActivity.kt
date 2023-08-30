@@ -36,6 +36,14 @@ class AdminPostinganActivity : AppCompatActivity() {
             onBackPressed()
         }
         fetchDataAndUpdateAdapter(GET_EXTRA_STATUS_POSTINGAN)
+        
+        if (GET_EXTRA_STATUS_POSTINGAN == 1) {
+            binding.textView5.setText("Pengajuan Pending")
+        } else if (GET_EXTRA_STATUS_POSTINGAN == 2) {
+            binding.textView5.setText("Pengajuan Diterima")
+        } else if (GET_EXTRA_STATUS_POSTINGAN == 3) {
+            binding.textView5.setText("Pengajuan Ditolak")
+        }
     }
 
     private fun fetchDataAndUpdateAdapter(nomor: Int) {
