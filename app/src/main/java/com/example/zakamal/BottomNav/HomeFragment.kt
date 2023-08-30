@@ -63,6 +63,8 @@ class HomeFragment : Fragment() {
             isUser = true
         }
 
+
+
         if (!isUser) {
             _binding = FragmentHomeBinding.inflate(inflater, container, false)
             return binding.root
@@ -114,6 +116,40 @@ class HomeFragment : Fragment() {
         })
     }
 
+    private fun getPostinganKomunitasUser(nomor: Int) {
+        val apiService = DomainApi.monitoringService
+        val idUser = preference.getValues("ID_USER")?.toInt()
+
+        if (idUser != null) {
+            val call = apiService.getStatusUser(idUser, nomor)
+            call.enqueue(object : retrofit2.Callback<PostFeedAdminPendingResponse> {
+                override fun onResponse(
+                    call: Call<PostFeedAdminPendingResponse>,
+                    response: Response<PostFeedAdminPendingResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val totalData = response.body()?.totalData ?: 0
+                        if (nomor == 1) {
+                            bindingUser?.tvNumber3?.text = totalData.toString()
+                        } else if (nomor == 2) {
+                            bindingUser?.tvNumber1?.text = totalData.toString()
+                        } else if (nomor == 3) {
+                            bindingUser?.tvNumber2?.text = totalData.toString()
+                        }
+                    } else {
+                        println("ERROR ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<PostFeedAdminPendingResponse>, t: Throwable) {
+                    println("ERROR ${t.message}")
+                }
+            })
+        } else {
+            println("ID_USER is null")
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         preference = Preference(requireActivity().applicationContext)
@@ -163,6 +199,10 @@ class HomeFragment : Fragment() {
 
 //            Log.d("TAG", "checkUser: ${preference.getValues("NAMA_LENGKAP")}")
 //            binding.tvGreetingUser.setText(preference.getValues("NAMA_LENGKAP")) ?: "User"
+
+            getPostinganKomunitasUser(1)
+            getPostinganKomunitasUser(2)
+            getPostinganKomunitasUser( 3)
 
             val listView = bindingUser.komunitasHome
             getKomunitasAll(listView)
@@ -231,4 +271,5 @@ class HomeFragment : Fragment() {
                 }
             }
     }
+
 }
