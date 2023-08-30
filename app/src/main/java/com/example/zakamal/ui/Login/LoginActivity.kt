@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         binding.btnMasuk.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()

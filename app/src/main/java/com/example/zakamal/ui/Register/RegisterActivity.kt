@@ -3,6 +3,7 @@ package com.example.zakamal.ui.Register
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +26,7 @@ class RegisterActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityRegisterBinding
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var sharedPreferencesId: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -39,20 +41,10 @@ class RegisterActivity : AppCompatActivity() {
 //        )
 //        postRegister(registerRequestBody)
 
-
-
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                // The Intent that was returned by the Activity
-                val data: Intent? = result.data
-
-                // Get the selected province name from SharedPreferences
-                val sharedPreferences = getSharedPreferences("selectedProvinsi", Context.MODE_PRIVATE)
-                val selectedProvinsiName = sharedPreferences.getString("selectedProvinsi", null)
-
-                // Set the button text with the selected province name
-                binding.btnSelectProvinsi.text = selectedProvinsiName
-            }
+        sharedPreferencesId = this.getSharedPreferences("selectedProvinsi", Context.MODE_PRIVATE)
+        val selectedProvinsiName = sharedPreferencesId.getString("selectedProvinsi", null)
+        selectedProvinsiName?.let {
+            binding.btnSelectProvinsi.text = it
         }
 
         binding.btnSelectProvinsi.setOnClickListener {

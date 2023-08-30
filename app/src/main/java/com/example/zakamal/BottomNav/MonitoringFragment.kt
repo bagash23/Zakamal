@@ -146,8 +146,8 @@ class MonitoringFragment : Fragment() {
                             startActivity(intent)
 
                         }
-                    }
 
+                    }
                     updateBarChart(chartData)
                     listView.adapter = MonitoringChartAdapter(requireContext(), monitoringDataList)
                     updateBarChart(chartData)

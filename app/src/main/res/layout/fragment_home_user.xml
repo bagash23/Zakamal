@@ -89,7 +89,7 @@
 
                     <TextView
                         android:id="@+id/textView26"
-                        android:layout_width="234dp"
+                        android:layout_width="225dp"
                         android:layout_height="match_parent"
                         android:drawableRight="@drawable/arrow_left_orange"
                         android:fontFamily="@font/poppins_regular"
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="Monitoring Zakat"
+            android:text="Status Penerimaan Zakat"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"

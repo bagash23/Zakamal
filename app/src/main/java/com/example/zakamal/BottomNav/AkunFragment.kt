@@ -14,6 +14,7 @@ import com.example.zakamal.BuildConfig
 import com.example.zakamal.R
 import com.example.zakamal.databinding.FragmentAkunBinding
 import com.example.zakamal.databinding.FragmentMonitoringBinding
+import com.example.zakamal.utils.Preference
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
@@ -23,10 +24,14 @@ class AkunFragment : Fragment() {
     private var _binding: FragmentAkunBinding? =null
     private val binding get() = _binding!!
 
+    private lateinit var preference: Preference
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        preference = Preference(requireActivity().applicationContext)
         _binding = FragmentAkunBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -44,8 +49,18 @@ class AkunFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences("location", Context.MODE_PRIVATE)
         val setLocationText = sharedPreferences.getString("location", null)
 
+
+        val idUser = preference.getValues("NAMA_LENGKAP")
+        val idPezakat = preference.getValues("TELEPON")
+        val namaLengkap = preference.getValues("EMAIL")
+
+        // Combine all data into a single string
+        val userData = "ID_USER: $idUser\n" +
+                "ID_PEZAKAT: $idPezakat\n" +
+                "NAMA_LENGKAP: $namaLengkap\n"
+
 //        qrCode Generator
-        val bitmap = generateQRCode("Bagas Haryadi")
+        val bitmap = generateQRCode(userData)
         imgQR.setImageBitmap(bitmap)
 
 
@@ -54,6 +69,13 @@ class AkunFragment : Fragment() {
             binding.akunLocation.text = it
         }
         idVersi.setText(versionName)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        preference = Preference(requireActivity().applicationContext)
+        binding.tvGreetingUser.setText(preference.getValues("NAMA_LENGKAP"))
     }
 
 

@@ -69,6 +69,13 @@ interface Monitoring {
         @Path("nomor") nomor: Int
     ) : Call<PostFeedAdminPendingResponse>
 
+
+    @GET("v1/user/{id_user}/post_feed/status/{nomor}")
+    fun getStatusUser(
+        @Path("id_user") idUser: Int,
+        @Path("nomor") nomor: Int
+    ) : Call<PostFeedAdminPendingResponse>
+
     @PUT("v1/admin/post_feed/{id_post_feed}/status")
     fun updateStatus(
         @Path("id_post_feed")idPostFeed: Int,
