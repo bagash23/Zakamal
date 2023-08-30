@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zakamal.api.AdminGetCommunity.AdminGetCommunity
 import com.example.zakamal.api.AdminGetCommunity.AdminGetCommunityDetail
 import com.example.zakamal.api.AdminGetCommunity.AdminGetCommunityResponse
-import com.example.zakamal.api.DomainApi.adminGetCommunityService
 import com.example.zakamal.databinding.ActivityAdminPostinganBinding
 import kotlin.math.log
 
