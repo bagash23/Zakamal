@@ -42,7 +42,7 @@ class AdminPostinganAdapter(private val dataList: MutableList<AdminPendingRespon
         fun bind(data: AdminPendingResponse) {
             statusTextView.text = data.status
             titleTextView.text = data.judul_post
-            numberTextView.text = data.id_post_feed.toString()
+            numberTextView.text = data.biaya.toString()
             itemView.setOnClickListener {
                 itemClickListener?.invoke(data)
             }

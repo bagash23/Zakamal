@@ -35,7 +35,6 @@ class MonitoringResultAdapter(context: Context, private val dataList: List<AllPr
         val textTelpone: TextView = view.findViewById(R.id.txt_telpone)
         val textKeterangan: TextView = view.findViewById(R.id.txt_keterangan)
         val textTanggal: TextView = view.findViewById(R.id.txt_tgl_post)
-        val Gambar: TextView = view.findViewById(R.id.poster_provinsi)
 
         // Set initial visibility based on expanded state
         textAlamat.visibility = View.GONE
