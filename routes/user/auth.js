@@ -15,12 +15,12 @@ router.post('/pezakat/register', (req, res) => {
         return;
     }
 
-    if (telepon.toString().length !== 12) {
-        res.status(400).json({
-            message: 'Nomor telepon minimal 12 digit'
-        });
-        return;
-    }
+    // if (telepon.toString().length !== 12) {
+    //     res.status(400).json({
+    //         message: 'Nomor telepon minimal 12 digit'
+    //     });
+    //     return;
+    // }
 
     if (!email.includes('@')) {
         res.status(400).json({
