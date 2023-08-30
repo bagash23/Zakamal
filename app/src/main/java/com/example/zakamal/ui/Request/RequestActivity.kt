@@ -122,8 +122,6 @@ class RequestActivity : AppCompatActivity() {
         }
 
 
-
-
         val progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Mohon Tunggu...")
         progressDialog.show()
