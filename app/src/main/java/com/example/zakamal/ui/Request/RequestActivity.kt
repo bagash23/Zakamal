@@ -97,6 +97,32 @@ class RequestActivity : AppCompatActivity() {
         val keteranganRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), binding.editTextText5.text.toString())
         val biayaRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), binding.editTextText4.text.toString())
 
+        if (binding.editTextText2.text.toString().isEmpty()) {
+            binding.editTextText2.error = "Alamat tidak boleh kosong"
+            binding.editTextText2.requestFocus()
+            return
+        }
+
+        if (binding.editTextText.text.toString().isEmpty()) {
+            binding.editTextText.error = "Judul tidak boleh kosong"
+            binding.editTextText.requestFocus()
+            return
+        }
+
+        if (binding.editTextText4.text.toString().isEmpty()) {
+            binding.editTextText4.error = "Biaya tidak boleh kosong"
+            binding.editTextText4.requestFocus()
+            return
+        }
+
+        if (binding.editTextText5.text.toString().isEmpty()) {
+            binding.editTextText5.error = "Keterangan tidak boleh kosong"
+            binding.editTextText5.requestFocus()
+            return
+        }
+
+
+
 
         val progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Mohon Tunggu...")
