@@ -162,6 +162,13 @@ router.get('/user/:id_user/post_feed/:id_post_feed/dokumen', (req, res) => {
 
 // Post post_feed
 router.post('/user/:id_user/post_feed/add', upload.single('dokumen'), (req, res) => {
+
+    if (!req.file) {
+        return res.status(400).json({
+            message: 'No file uploaded'
+        });
+    }
+
     const { id_provinsi, judul_post, biaya, alamat, keterangan } = req.body;
     const id_user = req.params.id_user;
     const status = 'Pending';
@@ -215,6 +222,129 @@ router.post('/user/:id_user/post_feed/add', upload.single('dokumen'), (req, res)
                 message: 'Post berhasil dibuat', postId 
             });
         });
+    });
+});
+
+// Get post_feed status all by id_user
+router.get('/user/:id_user/post_feed/status/all', (req, res) => {
+    const { id_user } = req.params;
+
+    const getPostFeedQuery = `
+        SELECT post_feed.id_post_feed, post_feed.id_user, post_feed.id_provinsi, post_feed.judul_post, post_feed.biaya, post_feed.alamat, post_feed.keterangan, post_feed.status, post_feed.tanggal_post, user.nama_lengkap, user.telepon, provinsi.nama_provinsi, role.nama_role
+        FROM post_feed
+        INNER JOIN user ON post_feed.id_user = user.id_user
+        INNER JOIN provinsi ON post_feed.id_provinsi = provinsi.id_provinsi
+        INNER JOIN role ON user.id_role = role.id_role
+        WHERE post_feed.id_user = ?
+        ORDER BY post_feed.tanggal_post DESC
+    `;
+    db.query(getPostFeedQuery, [id_user], (getPostFeedError, postFeedRows) => {
+        if (getPostFeedError) {
+            console.error(getPostFeedError);
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil post_feed'
+            });
+        }
+
+        const totalData = postFeedRows.length;
+
+        res.status(200).json({
+            totalData: totalData,
+            data: postFeedRows
+        });
+    });
+});
+
+// Get post_feed status 1 by id_user
+router.get('/user/:id_user/post_feed/status/1', (req, res) => {
+    const { id_user } = req.params;
+
+    const getPostFeedQuery = `
+        SELECT post_feed.id_post_feed, post_feed.id_user, post_feed.id_provinsi, post_feed.judul_post, post_feed.biaya, post_feed.alamat, post_feed.keterangan, post_feed.status, post_feed.tanggal_post, user.nama_lengkap, user.telepon, provinsi.nama_provinsi, role.nama_role
+        FROM post_feed
+        INNER JOIN user ON post_feed.id_user = user.id_user
+        INNER JOIN provinsi ON post_feed.id_provinsi = provinsi.id_provinsi
+        INNER JOIN role ON user.id_role = role.id_role
+        WHERE post_feed.id_user = ? AND post_feed.status = "Pending"
+        ORDER BY post_feed.tanggal_post DESC
+    `;
+
+    db.query(getPostFeedQuery, [id_user], (getPostFeedError, postFeedRows) => {
+        if (getPostFeedError) {
+            console.error(getPostFeedError);
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil post_feed'
+            });
+        }
+
+        const totalData = postFeedRows.length;
+
+        res.status(200).json({
+            totalData: totalData,
+            data: postFeedRows
+        });
+    });
+});
+
+// Get post_feed status 2 by id_user
+router.get('/user/:id_user/post_feed/status/2', (req, res) => {
+    const { id_user } = req.params;
+
+    const getPostFeedQuery = `
+        SELECT post_feed.id_post_feed, post_feed.id_user, post_feed.id_provinsi, post_feed.judul_post, post_feed.biaya, post_feed.alamat, post_feed.keterangan, post_feed.status, post_feed.tanggal_post, user.nama_lengkap, user.telepon, provinsi.nama_provinsi, role.nama_role
+        FROM post_feed
+        INNER JOIN user ON post_feed.id_user = user.id_user
+        INNER JOIN provinsi ON post_feed.id_provinsi = provinsi.id_provinsi
+        INNER JOIN role ON user.id_role = role.id_role
+        WHERE post_feed.id_user = ? AND post_feed.status = "Diterima"
+        ORDER BY post_feed.tanggal_post DESC
+    `;
+    db.query(getPostFeedQuery, [id_user], (getPostFeedError, postFeedRows) => {
+        if (getPostFeedError) {
+            console.error(getPostFeedError);
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil post_feed'
+            });
+        }
+
+        const totalData = postFeedRows.length;
+
+        res.status(200).json({
+            totalData: totalData,
+            data: postFeedRows
+        });
+    });
+});
+
+// Get post_feed status 3 by id_user
+router.get('/user/:id_user/post_feed/status/3', (req, res) => {
+    const { id_user } = req.params;
+
+    const getPostFeedQuery = `
+        SELECT post_feed.id_post_feed, post_feed.id_user, post_feed.id_provinsi, post_feed.judul_post, post_feed.biaya, post_feed.alamat, post_feed.keterangan, post_feed.status, post_feed.tanggal_post, user.nama_lengkap, user.telepon, provinsi.nama_provinsi, role.nama_role
+        FROM post_feed
+        INNER JOIN user ON post_feed.id_user = user.id_user
+        INNER JOIN provinsi ON post_feed.id_provinsi = provinsi.id_provinsi
+        INNER JOIN role ON user.id_role = role.id_role
+        WHERE post_feed.id_user = ? AND post_feed.status = "Ditolak"
+        ORDER BY post_feed.tanggal_post DESC
+    `;
+
+    db.query(getPostFeedQuery, [id_user], (getPostFeedError, postFeedRows) => {
+        if (getPostFeedError) {
+            console.error(getPostFeedError);
+            return res.status(500).json({
+                message: 'Terjadi kesalahan saat mengambil post_feed'
+            });
+        }
+
+        const totalData = postFeedRows.length;
+
+        res.status(200).json({
+            totalData: totalData,
+            data: postFeedRows
+        });
+
     });
 });
 

@@ -126,22 +126,46 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **Respon:** Pesan sukses atau pesan error.
 
 #### Mendapatkan Data Post Feed berdasarkan Semua Status
-- **URL:** `/user/post_feed/status/all`
+- **URL:** `/admin/post_feed/status/all`
 - **Metode:** `GET`
 - **Respon:** Pesan sukses atau pesan error.
 
 #### Mendapatkan Data Post Feed berdasarkan Status Pending
-- **URL:** `/user/post_feed/status/1`
+- **URL:** `/admin/post_feed/status/1`
 - **Metode:** `GET`
 - **Respon:** Pesan sukses atau pesan error.
 
 #### Mendapatkan Data Post Feed berdasarkan Status Diterima
-- **URL:** `/user/post_feed/status/2`
+- **URL:** `/admin/post_feed/status/2`
 - **Metode:** `GET`
 - **Respon:** Pesan sukses atau pesan error.
 
 #### Mendapatkan Data Post Feed berdasarkan Status Ditolak
-- **URL:** `/user/post_feed/status/3`
+- **URL:** `/admin/post_feed/status/3`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapatkan Data Post Feed berdasarkan All status ID User
+- **URL:** `/user/:id_user/post_feed/all`
+- **Param Path:** `id_user`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapatkan Data Post Feed berdasarkan status Pending pada ID User
+- **URL:** `/user/:id_user/post_feed/status/1`
+- **Param Path:** `id_user`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapatkan Data Post Feed berdasarkan status Diterima pada ID User
+- **URL:** `/user/:id_user/post_feed/status/2`
+- **Param Path:** `id_user`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapatkan Data Post Feed berdasarkan status Ditolak pada ID User
+- **URL:** `/user/:id_user/post_feed/status/3`
+- **Param Path:** `id_user`
 - **Metode:** `GET`
 - **Respon:** Pesan sukses atau pesan error.
 
