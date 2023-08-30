@@ -1,5 +1,6 @@
 package com.example.zakamal.BottomNav
 
+
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -20,18 +21,15 @@ import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.zakamal.R
 import com.example.zakamal.api.DomainApi
 import com.example.zakamal.databinding.FragmentHomeBinding
 import com.example.zakamal.databinding.FragmentHomeUserBinding
 import com.example.zakamal.model.monitoring.AllProvinsiData
+import com.example.zakamal.model.monitoring.PostFeedAdminPendingResponse
 import com.example.zakamal.ui.AdminPostingan.AdminPostinganActivity
 import com.example.zakamal.ui.Community.CommunityAll.CommunityAllActivity
-import com.example.zakamal.ui.Community.CommunityComment.CommunityCommentActivity
 import com.example.zakamal.ui.Request.RequestActivity
 import com.example.zakamal.utils.KomunitasHomeAdapter
-import com.example.zakamal.utils.MonitoringResultAdapter
 import com.example.zakamal.utils.Preference
 
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -83,6 +81,37 @@ class HomeFragment : Fragment() {
             getCurrentLocation()
         }
         checkUser()
+    }
+
+    private fun getPostinganKomunitas(nomor: Int) {
+        val apiService = DomainApi.monitoringService
+        val call = apiService.getStatusPending(nomor)
+        call.enqueue(object : retrofit2.Callback<PostFeedAdminPendingResponse> {
+            override fun onResponse(
+                call: Call<PostFeedAdminPendingResponse>,
+                response: Response<PostFeedAdminPendingResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val totalData = response.body()!!.totalData
+                    if (nomor == 1 ){
+                        binding.tvNumber3.text = totalData.toString()
+                    } else if (nomor == 2) {
+                        binding.tvNumber1.text = totalData.toString()
+                    } else if (nomor == 3) {
+                        binding.tvNumber2.text = totalData.toString()
+                    }
+
+
+                } else {
+                    println("ERROR ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<PostFeedAdminPendingResponse>, t: Throwable) {
+                println("ERROR ${t.message}")
+            }
+
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -147,29 +176,28 @@ class HomeFragment : Fragment() {
 
             binding.llKeterimaPostingan.setOnClickListener {
                 val intent = Intent(requireContext(), AdminPostinganActivity::class.java)
-                intent.putExtra("EXTRA_STATUS_POSTINGAN", "KETERIMA")
+                intent.putExtra("EXTRA_STATUS_POSTINGAN", "2")
                 startActivity(intent)
             }
 
             binding.llPostinganPending.setOnClickListener {
                 val intent = Intent(requireContext(), AdminPostinganActivity::class.java)
-                intent.putExtra("EXTRA_STATUS_POSTINGAN", "DIPROSES")
+                intent.putExtra("EXTRA_STATUS_POSTINGAN", "1")
                 startActivity(intent)
             }
 
             binding.llPostinganDitolak.setOnClickListener {
                 val intent = Intent(requireContext(), AdminPostinganActivity::class.java)
-                intent.putExtra("EXTRA_STATUS_POSTINGAN", "DITOLAK")
+                intent.putExtra("EXTRA_STATUS_POSTINGAN", "3")
                 startActivity(intent)
             }
 
+            getPostinganKomunitas(1)
+            getPostinganKomunitas(2)
+            getPostinganKomunitas(3)
+
             val listView = binding.komunitasHome
             getKomunitasAll(listView)
-
-//            binding.llCommunityCard.setOnClickListener {
-//                val intent = Intent(requireContext(), CommunityCommentActivity::class.java)
-//                startActivity(intent)
-//            }
         }
     }
 
