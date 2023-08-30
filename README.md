@@ -37,6 +37,7 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **Respon:** Pesan sukses atau pesan error.
 
 
+
 ### Admin
 
 ### Data Provinsi
@@ -106,22 +107,43 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **Respon:** Pesan sukses atau pesan error.
 
 
+#### Data Pezakat
+
+#### Mendapatkan Semua Data Pezakat
+- **URL:** `/admin/pezakat`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapatkan Data Pezakat berdasarkan ID Pezakat
+- **URL:** `/admin/pezakat/:id_pezakat`
+- **Param Path:** `id_pezakat`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Menambahkan Data Pezakat
+- **URL:** `/admin/pezakat/add`
+- **Body Input:** `nama_lengkap, telepon, email, password, id_provinsi`
+- **Metode:** `POST`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mengubah Data Pezakat berdasarkan ID Pezakat
+- **URL:** `/admin/pezakat/update/:id_pezakat`
+- **Param Path:** `id_pezakat`
+- **Body Input:** `nama_lengkap, telepon, email, id_provinsi`
+- **Metode:** `PUT`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Menghapus Data Pezakat berdasarkan ID Pezakat
+- **URL:** `/admin/pezakat/delete/:id_pezakat`
+- **Param Path:** `id_pezakat`
+- **Metode:** `DELETE`
+- **Respon:** Pesan sukses atau pesan error.
+
+
 #### Posting Feed/Pengajuan
 
-#### Mendapatkan Data Semua Post Feed
-- **Param Path:** `/user/post_feed/all`
-- **Metode:** `GET`
-- **Respon:** Pesan sukses atau pesan error.
-
-#### Mendapakan Data Post Feed berdasarkan ID Post Feed
-- **URL:** `/user/post_feed/:id_post_feed`
-- **Param Path:** `id_post_feed`
-- **Metode:** `GET`
-- **Respon:** Pesan sukses atau pesan error.
-
-#### Mendapatkan Data Post Feed berdasarkan Nama Provinsi
-- **URL:** `/user/post_feed/provinsi/:nama_provinsi`
-- **Param Path:** `nama_provinsi`
+#### Mendapatkan Semua Data Post Feed
+- **URL:** `/admin/post_feed`
 - **Metode:** `GET`
 - **Respon:** Pesan sukses atau pesan error.
 
@@ -142,6 +164,89 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 
 #### Mendapatkan Data Post Feed berdasarkan Status Ditolak
 - **URL:** `/admin/post_feed/status/3`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mengubah Data Status Post Feed berdasarkan ID Post Feed
+- **URL:** `/admin/post_feed/:id_post_feed/status`
+- **Param Path:** `id_post_feed`
+- **Body Input:** `status`
+- **Metode:** `PUT`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Menghapus Data Post Feed berdasarkan ID Post Feed
+- **URL:** `/admin/post_feed/delete/:id_post_feed`
+- **Param Path:** `id_post_feed`
+- **Metode:** `DELETE`
+- **Respon:** Pesan sukses atau pesan error.
+
+
+#### Data Komentar
+
+#### Mengubah Data Status Post Feed berdasarkan ID Post Feed
+- **URL:** `/admin/post_feed/:id_post_feed/status`
+- **Param Path:** `id_post_feed`
+- **Body Input:** `status`
+- **Metode:** `PUT`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Menghapus Data Post Feed berdasarkan ID Post Feed
+- **URL:** `/admin/post_feed/delete/:id_post_feed`
+- **Param Path:** `id_post_feed`
+- **Metode:** `DELETE`
+- **Respon:** Pesan sukses atau pesan error.
+
+
+
+### User
+
+#### Auth
+
+#### Login User
+- **URL:** `/user/login`
+- **Body Input:** `email` dan `password`
+- **Metode:** `POST`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Register Pezakat
+- **URL:** `/pezakat/register`
+- **Body Input:** `nama_lengkap`, `telepon`, `email`, `password` dan `id_provinsi`
+- **Metode:** `POST`
+- **Respon:** Pesan sukses atau pesan error.
+
+
+#### Data Pezakat
+
+#### Mendapatkan Data Pezakat berdasarkan ID Pezakat
+- **URL:** `/pezakat/:id_pezakat`
+- **Param Path:** `id_pezakat`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mengubah Data Pezakat berdasarkan ID Pezakat
+- **URL:** `/pezakat/profile/update/:id_pezakat`
+- **Param Path:** `id_pezakat`
+- **Body Input:** `nama_lengkap`, `telepon`, `email` dan `id_provinsi`
+- **Metode:** `PUT`
+- **Respon:** Pesan sukses atau pesan error.
+
+
+#### Post Feed/Pengajuan
+
+#### Mendapatkan Data Semua Post Feed
+- **Param Path:** `/user/post_feed/all`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapakan Data Post Feed berdasarkan ID Post Feed
+- **URL:** `/user/post_feed/:id_post_feed`
+- **Param Path:** `id_post_feed`
+- **Metode:** `GET`
+- **Respon:** Pesan sukses atau pesan error.
+
+#### Mendapatkan Data Post Feed berdasarkan Nama Provinsi
+- **URL:** `/user/post_feed/provinsi/:nama_provinsi`
+- **Param Path:** `nama_provinsi`
 - **Metode:** `GET`
 - **Respon:** Pesan sukses atau pesan error.
 
@@ -204,18 +309,8 @@ Setelah mengikuti langkah-langkah instalasi, server Express akan berjalan secara
 - **Metode:** `POST`
 - **Respon:** Pesan sukses atau pesan error.
 
-#### Mengubah Data Status Post Feed berdasarkan ID Post Feed
-- **URL:** `/admin/post_feed/:id_post_feed/status`
-- **Param Path:** `id_post_feed`
-- **Body Input:** `status`
-- **Metode:** `PUT`
-- **Respon:** Pesan sukses atau pesan error.
 
-#### Menghapus Data Post Feed berdasarkan ID Post Feed
-- **URL:** `/admin/post_feed/delete/:id_post_feed`
-- **Param Path:** `id_post_feed`
-- **Metode:** `DELETE`
-- **Respon:** Pesan sukses atau pesan error.
+
 
 
 ## Lisensi
