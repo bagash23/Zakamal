@@ -58,6 +58,10 @@ class RequestActivity : AppCompatActivity() {
             addData(pdfUri!!, getSharedPreferences("numberProvinsi", Context.MODE_PRIVATE).getInt("numberProvinsi", 0),idUsers)
         }
 
+        binding.ivBackRequest.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 
     private fun selectPdf() {
@@ -188,6 +192,7 @@ class RequestActivity : AppCompatActivity() {
                 println("ERROR ${t.message}")
             }
         })
+
     }
 
 }

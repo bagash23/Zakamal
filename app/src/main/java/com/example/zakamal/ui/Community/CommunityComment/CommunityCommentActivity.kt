@@ -1,6 +1,7 @@
 package com.example.zakamal.ui.Community.CommunityComment
 
 import android.app.ProgressDialog
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -43,6 +44,7 @@ class CommunityCommentActivity : AppCompatActivity() {
         val idInt: Int = idPost!!.toInt()
         val idUser = preferences.getValues("ID_USER")
         val idUserInt: Int = idUser!!.toInt()
+
         println("userID $idUser")
         println("postID $idInt")
 
@@ -141,6 +143,9 @@ class CommunityCommentActivity : AppCompatActivity() {
         binding.ivBackComment.setOnClickListener {
             onBackPressed()
         }
+
+        val res = getResources().getDrawable(R.drawable.sekolah)
+        binding.posterProvinsi.setImageDrawable(res)
     }
 
     private fun fetchComments(id: Int) {
