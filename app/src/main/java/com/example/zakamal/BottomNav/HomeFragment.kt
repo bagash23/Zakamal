@@ -65,6 +65,8 @@ class HomeFragment : Fragment() {
             isUser = true
         }
 
+
+
         if (!isUser) {
             _binding = FragmentHomeBinding.inflate(inflater, container, false)
             return binding.root
