@@ -93,6 +93,7 @@ class HomeFragment : Fragment() {
         } else {
             bindingUser.tvGreetingUser.setText(preference.getValues("NAMA_LENGKAP")) ?: "User"
         }
+
     }
 
     private fun getKomunitasAll(listView: ListView) {
@@ -104,6 +105,8 @@ class HomeFragment : Fragment() {
             ) {
                 if (response.isSuccessful) {
                     val komunitasAlls = response.body()
+                    println("komunitasAlls $komunitasAlls")
+
                     listView.adapter = KomunitasHomeAdapter(requireContext(), komunitasAlls!!)
                 } else {
                     println("Response code error: ${response.code()}")
