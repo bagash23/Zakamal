@@ -115,6 +115,14 @@ class CommunityCommentActivity : AppCompatActivity() {
 
                         binding.txtTglPost.text = formattedDate
 
+                        if (dataObject.status == "Diterima") {
+                            binding.txtStatus.setTextColor(resources.getColor(R.color.Light_Green))
+                        } else if (dataObject.status == "Ditolak") {
+                            binding.txtStatus.setTextColor(resources.getColor(R.color.Primary_Red))
+                        } else {
+                            binding.txtStatus.setTextColor(resources.getColor(R.color.Primary_Orange))
+                        }
+
                     } else {
                         println("No data received")
                     }
