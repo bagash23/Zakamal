@@ -38,7 +38,7 @@ interface Monitoring {
     ): Call<AllProvinsiData>
 
 //    get komentar
-    @GET("v1//user/{id_post_feed}/komentar")
+    @GET("v1/user/{id_post_feed}/komentar")
     fun getKomentarByID(
     @Path("id_post_feed") idPostFeed: Int,
     ) : Call<List<KomentarResponse>>
@@ -62,5 +62,17 @@ interface Monitoring {
         @Part("keterangan") keterangan: RequestBody,
         @Part dokumen: MultipartBody.Part?
     ) : Call<AddZakatResponse>
+
+//    data pending
+    @GET("v1/admin/post_feed/status/{nomor}")
+    fun getStatusPending(
+        @Path("nomor") nomor: Int
+    ) : Call<PostFeedAdminPendingResponse>
+
+    @PUT("v1/admin/post_feed/{id_post_feed}/status")
+    fun updateStatus(
+        @Path("id_post_feed")idPostFeed: Int,
+        @Body statusRequest: StatusRequest
+    ) : Call<StatusResponse>
 
 }

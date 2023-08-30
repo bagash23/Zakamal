@@ -52,7 +52,6 @@ class CommunityCommentActivity : AppCompatActivity() {
         val getKomentarById: Call<List<KomentarResponse>> = apiServices.getKomentarByID(idInt)
 
 
-
         findViewById<Button>(R.id.btn_send_add).setOnClickListener {
             val requestData = KomentarRequest()
             requestData.komentar = findViewById<EditText>(R.id.edt_add_komen).text.toString().trim()
